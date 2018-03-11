@@ -1,11 +1,14 @@
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+var cssExtractPlugin = new ExtractTextPlugin({
+    filename: __dirname + '/public/assets/bundle.css'
+});
+
 module.exports = {
-    // 가장 처음 읽을 스크립트파일
-    // 여기서부터 import 되어있는 다른 스크립트를 불러온다.
     entry: './src/index.js',
 
-    // 파일을 합치고 ./public/bundle.js 에 저장한다.
     output: {
-        path: __dirname + '/public',
+        path: __dirname + '/public/assets',
         filename: 'bundle.js',
     },
 
@@ -23,7 +26,9 @@ module.exports = {
             },
             {
                 test: /\.(css|scss)$/,
-                loader: 'css-loader',
+                loader: cssExtractPlugin.extract({
+                    use: ['css-loader']
+                }),
                 exclude: /node_modules/
             },
             {
@@ -32,5 +37,8 @@ module.exports = {
                 exclude: /node_modules/
             }
         ]
-    }
+    },
+    plugins: [
+        cssExtractPlugin
+    ]
 };
