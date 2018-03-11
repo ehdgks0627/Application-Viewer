@@ -32,6 +32,7 @@
     "server": "babel server --out-dir build && node build/main.js"
   },
   "devDependencies": {
+    "babel-preset-stage-2": "^6.24.1",
     "extract-text-webpack-plugin": "^4.0.0-beta.0"
   }
 }

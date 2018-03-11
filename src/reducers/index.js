@@ -1,11 +1,12 @@
-/*import { combineReducers } from 'redux';
+import { combineReducers } from 'redux';
 
-import counter from './counter';
-import ui from './ui';
+import alert from './alert';
+import application from './application';
+import item from './item';
+import timer from './timer';
 
 const reducers = combineReducers({
-    counter, ui
+    alert, application, item, timer
 });
 
 export default reducers;
-*/

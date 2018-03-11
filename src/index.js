@@ -13,18 +13,10 @@ import './style/theme.scss';
 import './style/alert.css';
 
 
-//const store = createStore(reducers);
+const store = createStore(reducers);
 
 const root = document.getElementById("root");
 
-ReactDom.render(
-    (<BrowserRouter>
-      <App />
-    </BrowserRouter>),
-  root
-);
-
-/*
 ReactDom.render(
   (<Provider store={store}>
     <BrowserRouter>
@@ -33,4 +25,3 @@ ReactDom.render(
   </Provider>),
   root
 );
-*/

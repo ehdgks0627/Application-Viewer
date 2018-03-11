@@ -14,12 +14,12 @@ router.post('/upload', function(req, res){
   form.multiples = true;
 
   // store all uploads in the /uploads directory
-  form.uploadDir = path.join(__dirname, '../public/assets/file/');
+  form.uploadDir = path.join(__dirname, '../../public/files');
 
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    console.log(field, file);
+    // TODO into... .... ... db? & rename
     fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 
