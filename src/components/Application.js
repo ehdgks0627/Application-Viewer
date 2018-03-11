@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Alert from './Alert';
+
 import Item from './Item';
+import blankImage from '../static/blank.png';
+
 
 const propTypes = {
 
@@ -26,43 +30,61 @@ class Application extends Component {
             study: '',
             profile: '',
             last: '',
-            photo: ''
+            photo: '',
+            alert: ''
         };
+
+        this.makeAlert = this.makeAlert.bind(this);
+    }
+
+    makeAlert(content) {
+      this.setState({
+        alert: <Alert content={content} />
+      });
     }
 
     render() {
         return(
-          <div className="py-3">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-2"></div>
-                <div className="col-md-8">
-                  <div className="form-group">
-                    <center>
-                      <img src={this.state.photo ? this.state.photo : "blank"} style={{"maxWidth": "100%", "height": "150px"}} onClick={() => {alert('TODO')}}/>
-                    </center>
-                  </div>
-                  <br/>
-                  <ul className="breadcrumb" style={{"marginBottom": "0px", "marginTop": "0px"}}>
-                    <p className="lead">
-                      이름 : {this.state.name}
-                      <br/> 학번 : {this.state.sid}
-                      <br/> 전화번호 : {this.state.pnumber}
-                      <br/> 이메일 : {this.state.email}</p>
-                  </ul>
-                  <hr/>
-                  <ul className="list-group">
-                    <Item title={"취미"} isEditable={false}/>
-                    <Item title={"특기"} isEditable={false}/>
-                    <Item title={"공부한 것"} isEditable={false}/>
-                    <Item title={"자기소개"} isEditable={false}/>
-                    <Item title={"마지막으로 하고 싶은 말"} isEditable={false}/>
-                    <Item title={"사진"} isEditable={false}/>
-                  </ul>
-                  </div>
-                <div className="col-md-2"></div>
+          <div>
+            <div className="py-3">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-2" />
+                  <div className="col-md-8">
+                    <div className="form-group">
+                      <center>
+                        <img src={this.state.photo ? this.state.photo : blankImage} style={{"maxWidth": "100%", "height": "150px"}} onClick={() => {alert('TODO')}} />
+                      </center>
+                    </div>
+                    <br />
+                    <ul className="breadcrumb" style={{"marginBottom": "0px", "marginTop": "0px"}}>
+                      <p className="lead">
+                        이름 : {this.state.name}
+                        <br /> 학번 : {this.state.sid}
+                        <br /> 전화번호 : {this.state.pnumber}
+                        <br /> 이메일 : {this.state.email}
+                      </p>
+                    </ul>
+                    <hr />
+                    <ul className="list-group">
+                      <Item title={"취미"} isEditable={false} />
+                      <Item title={"특기"} isEditable={false} />
+                      <Item title={"공부한 것"} isEditable={false} />
+                      <Item title={"자기소개"} isEditable={false} />
+                      <Item title={"마지막으로 하고 싶은 말"} isEditable={false} />
+                      <Item title={"사진"} isEditable={false} />
+                      <br />
+                      <Item title={"질문 리스트"} isEditable={true} />
+                      <Item title={"전공 실력"} isEditable={true} />
+                      <Item title={"특이사항"} isEditable={true} />
+                      <Item title={"답변"} isEditable={true} />
+                    </ul>
+                    </div>
+                  <div className="col-md-2" />
+                </div>
               </div>
             </div>
+            {this.state.alert}
           </div>
         );
     }

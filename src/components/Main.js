@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom'
+import { Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import List from './List';
@@ -11,8 +11,8 @@ class Main extends Component {
         return(
           <main>
             <Switch>
-              <Route exact path='/application/:id' component={Application}/>
-              <Route exact path='/list' component={List}/>
+              <Route exact path='/application/:id' component={Application} />
+              <Route exact path='/list' component={List} />
               <Redirect from='*' to='/list' />
             </Switch>
           </main>

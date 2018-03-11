@@ -25,7 +25,11 @@ class Item extends Component {
 
     render() {
         return(
-            <li className="list-group-item"> <h4>{this.state.title}</h4><br/> {this.state.content}</li>
+            <li className="list-group-item">
+             <h4>{this.state.title}</h4>
+             <br />
+             {this.state.content}
+            </li>
         );
     }
 }

@@ -7,8 +7,11 @@ import { Provider } from 'react-redux';
 import App from './components/App';
 import reducers from './reducers';
 
+
 import './style/theme.css';
 import './style/theme.scss';
+import './style/alert.css';
+
 
 //const store = createStore(reducers);
 

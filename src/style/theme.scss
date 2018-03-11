@@ -1,11 +1,11 @@
 /*!
-* Based on Bootstrap v4.0.0 (https://getbootstrap.com) 
+* Based on Bootstrap v4.0.0 (https://getbootstrap.com)
 */
- 
+
 // Options
-// 
+//
 // Quickly modify global styling by enabling or disabling optional features.
-  
+
 $enable-rounded:            true !default;
 $enable-shadows:            true;
 $enable-transitions:        true;
@@ -45,9 +45,6 @@ $lead-font-size:   1.30rem;
 
 $spacer: 1.5rem;
 
-@import 'bootstrap-4.0.0';
-
- 
 html,body {
    height:100%;
 }
