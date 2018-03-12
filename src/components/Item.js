@@ -20,7 +20,20 @@ class Item extends Component {
         this.state = {
           title: props.title,
           content: props.content
-        }
+        };
+    }
+
+    componentWillReceiveProps(nextProps)
+    {
+      let newState = {};
+      if(this.state.title != nextProps.title) {
+        newState.title = nextProps.state;
+      } else if(this.state.content != nextProps.content) {
+        newState.content = nextProps.content;
+      }
+      if(Object.keys(newState).length !== 0) { // if props is changed
+        this.setState(newState);
+      }
     }
 
     render() {

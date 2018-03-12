@@ -3,9 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "axios": "^0.18.0",
+    "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.2",
     "css-loader": "^0.28.10",
     "express": "^4.16.2",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "formidable": "^1.2.0",
     "image-webpack-loader": "^4.1.0",
     "mongodb": "^3.0.4",
@@ -29,9 +32,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "server": "babel server --out-dir build && node build/main.js"
-  },
-  "devDependencies": {
-    "babel-preset-stage-2": "^6.24.1",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0"
   }
 }

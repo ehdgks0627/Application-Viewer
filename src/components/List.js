@@ -19,6 +19,8 @@ class List extends Component {
         return(
             <div>List</div>
         );
+        //TODO application each preview
+        //<Application preview={true} />
     }
 }
 List.propTypes = propTypes;

@@ -31,7 +31,14 @@ router.get('/:sid', function(req, res) {
           res.status(500).send({message: "Some error occurred while retrieving applications."});
       } else {
         //TODO filter
-          res.send(application);
+        if(application)
+        {
+            res.send(application);
+        }
+        else
+        {
+          return res.status(404).send({message: "Application not found with id " + req.params.sid});
+        }
       }
     });
 });
