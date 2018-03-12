@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const ApplicationSchema = new mongoose.Schema({
   sid: { type: Number, required: true, unique: true },
+  photo: { type: String, required: false, default: '' },
   name: { type: String, required: true },
   pnumber: { type: String, required: true },
   email: { type: String, required: true },
