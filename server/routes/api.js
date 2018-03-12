@@ -1,10 +1,15 @@
+import application from  './api/application';
+
 let express = require('express');
 let fs = require('fs');
 let formidable = require('formidable');
 let path = require('path');
 let router = express.Router();
 
+router.use('/application', application);
 
+
+//upload file
 router.post('/upload', function(req, res){
 
   // create an incoming form object
@@ -19,7 +24,7 @@ router.post('/upload', function(req, res){
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    // TODO into... .... ... db? & rename
+    // TODO insert into db with sid & rename 
     fs.rename(file.path, path.join(form.uploadDir, file.name));
   });
 

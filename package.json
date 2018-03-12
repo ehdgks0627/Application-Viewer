@@ -7,6 +7,8 @@
     "express": "^4.16.2",
     "formidable": "^1.2.0",
     "image-webpack-loader": "^4.1.0",
+    "mongodb": "^3.0.4",
+    "mongoose": "^5.0.9",
     "morgan": "^1.9.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
