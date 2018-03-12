@@ -33,7 +33,8 @@ class ApplicationList extends Component {
               return (<ApplicationPreview
                        photo={item.photo ? item.photo : blankImage}
                        name={item.name}
-                       sid={item.sid} />);
+                       sid={item.sid}
+                       _id={item._id} />);
           });
       };
 
