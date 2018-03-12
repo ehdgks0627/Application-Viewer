@@ -12,7 +12,8 @@ class ApplicationList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          applications: []
+          applications: [],
+          countPerRow: 4
         };
     }
 
@@ -27,19 +28,45 @@ class ApplicationList extends Component {
     }
 
     render() {
-      const mapToComponents = (data) => {
-          data.sort();
-          return data.map((item) => {
-              return (<ApplicationPreview
-                       photo={item.photo ? item.photo : blankImage}
-                       name={item.name}
-                       sid={item.sid}
-                       _id={item._id} />);
-          });
-      };
+        let mainStyle = {
+          'width': '50%',
+          'min-width': '800px',
+          'margin': '0 auto'
+        };
+
+        let rowStye = {
+          'margin': '1em'
+        };
+
+        const mapToComponents = (data) => {
+            data.sort();
+            let components = data.map((item) => {
+                return (<ApplicationPreview
+                         photo={item.photo ? item.photo : blankImage}
+                         name={item.name}
+                         sid={item.sid}
+                         _id={item._id}
+                         countPerRow={this.state.countPerRow}
+                         />);
+            });
+
+            let dom = [];
+            let buffer = [] ;
+            for(let i=0; i<components.length; i++) {
+                buffer.push(components[i]);
+                if ((i !== 0) && (i%this.state.countPerRow === this.state.countPerRow - 1)) {
+                    dom.push((<div className="row" style={rowStye}>{buffer}</div>));
+                    buffer = [];
+                }
+            }
+            if(buffer.length !== 0) {
+              dom.push((<div className="row" style={rowStye}>{buffer}</div>));
+            }
+            return dom;
+        };
 
         return(
-            <div>{mapToComponents(this.state.applications)}</div>
+            <div style={mainStyle}>{mapToComponents(this.state.applications)}</div>
         );
     }
 }
