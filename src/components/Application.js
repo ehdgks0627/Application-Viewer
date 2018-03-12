@@ -7,11 +7,11 @@ import blankImage from '../static/blank.png';
 import API_SERVER_URL from '../config.js';
 
 const propTypes = {
-  preview: PropTypes.bool
+
 };
 
 const defaultProps = {
-  preview: false
+
 };
 
 class Application extends Component {
@@ -39,40 +39,33 @@ class Application extends Component {
     }
 
     componentDidMount() {
-        if(!this.props.preview)
-        {
-          axios.get(API_SERVER_URL + '/application/' + this.props.match.params.id)
-              .then((result) => {
-                let data = result.data;
-                this.setState({
-                    name: data.name,
-                    sid: data.sid,
-                    pnumber: data.pnumber,
-                    email: data.email,
-                    hobby: data.hobby,
-                    strong: data.strong,
-                    study: data.study,
-                    profile: data.profile,
-                    last: data.last,
-                    photo: data.photo,
-                    questionList: data.questionList,
-                    major: data.major,
-                    special: data.special,
-                    answer: data.answer,
-                    startTime: data.startTime,
-                    endTime: data.endTime
-                });
-                //TODO notify setState changed to Item Model {"title": "취미", "content": data.hobby}
-              })
-              .catch((error) => { window.location = '/list'; });
-        }
+        axios.get(API_SERVER_URL + '/application/' + this.props.match.params.id)
+            .then((result) => {
+              let data = result.data;
+              this.setState({
+                  name: data.name,
+                  sid: data.sid,
+                  pnumber: data.pnumber,
+                  email: data.email,
+                  hobby: data.hobby,
+                  strong: data.strong,
+                  study: data.study,
+                  profile: data.profile,
+                  last: data.last,
+                  photo: data.photo,
+                  questionList: data.questionList,
+                  major: data.major,
+                  special: data.special,
+                  answer: data.answer,
+                  startTime: data.startTime,
+                  endTime: data.endTime
+              });
+              //TODO notify setState changed to Item Model {"title": "취미", "content": data.hobby}
+            })
+            .catch((error) => { window.location = '/list'; });
     }
 
     render() {
-      let preview = (
-        <div>preview</div>
-      );
-
       let detailview = (
           <div className="py-3">
             <div className="container">
@@ -114,7 +107,7 @@ class Application extends Component {
       );
         return(
           <div>
-            {this.props.preview ? preview : detailview}
+            {detailview}
           </div>
         );
     }

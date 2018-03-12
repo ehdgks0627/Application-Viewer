@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import List from './List';
+import ApplicationList from './ApplicationList';
 import Application from './Application';
 
 class Main extends Component {
@@ -12,7 +12,7 @@ class Main extends Component {
           <main>
             <Switch>
               <Route exact path='/application/:id' component={Application} />
-              <Route exact path='/list' component={List} />
+              <Route exact path='/list' component={ApplicationList} />
               <Redirect from='*' to='/list' />
             </Switch>
           </main>
