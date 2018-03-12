@@ -8,6 +8,7 @@ const Application = require('../../models/Application');
 
 router.get('/sync', function(req, res) {
   //TODO sync with layer7 db
+
   res.end();
 });
 
@@ -17,6 +18,7 @@ router.get('/', function(req, res) {
           console.log(err);
           res.status(500).send({message: "Some error occurred while retrieving applications."});
       } else {
+        //TODO filter
           res.send(applications);
       }
   });
@@ -28,6 +30,7 @@ router.get('/:sid', function(req, res) {
           console.log(err);
           res.status(500).send({message: "Some error occurred while retrieving applications."});
       } else {
+        //TODO filter
           res.send(application);
       }
     });
@@ -53,11 +56,10 @@ router.get('/start/:sid', function(req, res) {
           if(err) {
               res.status(500).send({message: "Could not update application with id " + req.params.sid});
           } else {
-              res.send(data);
+              res.send({message: "Application started successfully!"});
           }
       });
   });
-  res.end();
 });
 
 router.get('/end/:sid', function(req, res) {
@@ -80,29 +82,27 @@ router.get('/end/:sid', function(req, res) {
           if(err) {
               res.status(500).send({message: "Could not update application with id " + req.params.sid});
           } else {
-              res.send(data);
+              res.send({message: "Application ended successfully!"});
           }
       });
   });
-  res.end();
 });
 
 router.post('/', function(req, res) {
-  //TODO
-  if(!req.body.content) {
-        return res.status(400).send({message: "Application can not be empty"});
+  if(!req.body.sid) {
+        return res.status(400).send({message: "Application sid can not be empty"});
     }
 
     let data = {
-      sid: res.body.sid, //TODO check erro when sid is string?
-      name: res.body.name,
-      pnumber: res.body.pnumber,
-      email: res.body.email,
-      hobby: res.body.hobby,
-      strong: res.body.strong,
-      study: res.body.stduy,
-      profile: res.body.profile,
-      last: res.body.last
+      sid: req.body.sid,
+      name: req.body.name,
+      pnumber: req.body.pnumber,
+      email: req.body.email,
+      hobby: req.body.hobby,
+      strong: req.body.strong,
+      study: req.body.study,
+      profile: req.body.profile,
+      last: req.body.last
     };
 
     var application = new Application(data);
@@ -115,11 +115,9 @@ router.post('/', function(req, res) {
             res.send(data);
         }
     });
-  res.end();
 });
 
 router.delete('/:sid', function(req, res) {
-  //TODO
   Application.findByIdAndRemove(req.params.sid, function(err, application) {
         if(err) {
             console.log(err);
@@ -135,7 +133,6 @@ router.delete('/:sid', function(req, res) {
 
         res.send({message: "Application deleted successfully!"});
     });
-  res.end();
 });
 
 module.exports = router;

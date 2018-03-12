@@ -14,8 +14,8 @@ const ApplicationSchema = new mongoose.Schema({
   major: { type: Array, required: false, default: [] },
   special: { type: Array, required: false, default: [] },
   answer: { type: String, required: false, default: '' },
-  startTime: {type: Date, required: false },
-  endTime: {type: Date, required: false }
+  startTime: {type: Date, required: false, default: null },
+  endTime: {type: Date, required: false, default: null }
 },
 {
   timestamps: true
