@@ -13,7 +13,7 @@ router.get('/sync', function(req, res) {
 });
 
 router.get('/', function(req, res) {
-  Application.find(function(err, applications){
+  Application.find({}, { name: 1, sid: 1, photo: 1 }, function(err, applications){
       if(err) {
           console.log(err);
           res.status(500).send({message: "Some error occurred while retrieving applications."});
@@ -30,7 +30,6 @@ router.get('/:sid', function(req, res) {
           console.log(err);
           res.status(500).send({message: "Some error occurred while retrieving applications."});
       } else {
-        //TODO filter
         if(application)
         {
             res.send(application);
