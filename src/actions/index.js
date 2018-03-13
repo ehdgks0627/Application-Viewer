@@ -1,5 +1,6 @@
 import * as TYPES from './ActionTypes';
 import axios from 'axios';
+import { API_SERVER_URL } from '../config';
 
 export function newAlert(alertData) {
   return {

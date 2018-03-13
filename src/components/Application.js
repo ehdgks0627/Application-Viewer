@@ -4,14 +4,16 @@ import axios from 'axios';
 
 import Item from './Item';
 import blankImage from '../static/blank.png';
-import {SERVER_URL, API_SERVER_URL} from '../config';
+import { SERVER_URL, API_SERVER_URL } from '../config';
 
 const propTypes = {
-  makeAlert: PropTypes.func
+  startInterview: PropTypes.func.isrequired,
+  endInterview: PropTypes.func.isrequired
 };
 
 const defaultProps = {
-  makeAlert: () => {console.log('makeAlert is not defined')}
+  startInterview: () => {console.log('startInterview is not defined')},
+  endInterview: () => {console.log('endInterview is not defined')}
 };
 
 class Application extends Component {
@@ -66,6 +68,9 @@ class Application extends Component {
     }
 
     render() {
+      let startInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.startInterview(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button>);
+      let endInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.endInterview(this.state._id)}}>면접 끝내기</button>);
+
       let detailview = (
           <div className="py-3">
             <div className="container">
@@ -74,7 +79,10 @@ class Application extends Component {
                 <div className="col-md-8">
                   <div className="form-group">
                     <center>
-                      <img src={this.state.photo ? this.state.photo : blankImage} style={{"maxWidth": "100%", "height": "150px"}} onClick={() => {alert('TODO')}} />
+                      <img
+                      src={this.state.photo ? this.state.photo : blankImage}
+                      style={{"maxWidth": "100%", "height": "150px"}}
+                      onClick={() => {alert('TODO')}} />
                     </center>
                   </div>
                   <br />
@@ -86,8 +94,11 @@ class Application extends Component {
                       <br /> 이메일 : {this.state.email}
                     </p>
                   </ul>
-                  <button className="btn-primary mt-3" onClick={() => {this.props.makeAlert(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button> <br />
-                  {this.props.startTime}
+                  {this.state.startTime ? endInterviewButton : startInterviewButton}
+                  <br />
+
+
+                  {this.state.startTime}경과 시간
                   <hr />
                   <ul className="list-group">
                     <Item title={"취미"} content={this.state.hobby} isEditable={false} />

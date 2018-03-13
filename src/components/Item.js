@@ -26,9 +26,9 @@ class Item extends Component {
     componentWillReceiveProps(nextProps)
     {
       let newState = {};
-      if(this.state.title != nextProps.title) {
+      if(this.state.title !== nextProps.title) {
         newState.title = nextProps.state;
-      } else if(this.state.content != nextProps.content) {
+      } else if(this.state.content !== nextProps.content) {
         newState.content = nextProps.content;
       }
       if(Object.keys(newState).length !== 0) { // if props is changed

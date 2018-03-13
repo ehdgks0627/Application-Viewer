@@ -81,8 +81,9 @@ router.get('/start/:sid', function(req, res) {
       if(!application) {
           return res.status(404).send({message: "Application not found with id " + req.params.sid});
       }
-
-      application.startTime = new Date();
+      if(!application.startTime) {
+          application.startTime = new Date();
+      }
 
       application.save(function(err, data){
           if(err) {

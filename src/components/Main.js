@@ -4,16 +4,17 @@ import PropTypes from 'prop-types';
 
 import ApplicationList from './ApplicationList';
 import Application from './Application';
+import NotFound from './NotFound';
 
 
 const propTypes = {
-  makeAlert: PropTypes.func
+  startInterview: PropTypes.func
 };
 
 const defaultProps = {
-  makeAlert: () => {console.log('makeAlert is not defined')}
+  startInterview: () => {console.log('startInterview is not defined')},
+  endInterview: () => {console.log('endInterview is not defined')}
 };
-
 
 class Main extends Component {
 
@@ -21,9 +22,17 @@ class Main extends Component {
         return(
           <main>
             <Switch>
-              <Route exact path='/application/:id' render={(props) => <Application makeAlert={this.props.makeAlert} {...props} />} />
+              <Route exact path='/application/:id'
+              render={(props) => (
+                <Application
+                startInterview={this.props.startInterview}
+                endInterview={this.props.endInterview}
+                ref={(applicationElement) => {this.applicationElement = applicationElement;}}
+                {...props}
+                />)}
+              />
               <Route exact path='/list' component={ApplicationList} />
-              <Redirect from='*' to='/list' />
+              <Route component={NotFound} />
             </Switch>
           </main>
         );
