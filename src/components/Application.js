@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import Item from './Item';
 import blankImage from '../static/blank.png';
-import API_SERVER_URL from '../config.js';
+import {SERVER_URL, API_SERVER_URL} from '../config';
 
 const propTypes = {
   makeAlert: PropTypes.func
@@ -86,7 +86,8 @@ class Application extends Component {
                       <br /> 이메일 : {this.state.email}
                     </p>
                   </ul>
-                  <button className="btn-primary mt-3" onClick={() => {this.props.makeAlert(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button>
+                  <button className="btn-primary mt-3" onClick={() => {this.props.makeAlert(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button> <br />
+                  {this.props.startTime}
                   <hr />
                   <ul className="list-group">
                     <Item title={"취미"} content={this.state.hobby} isEditable={false} />

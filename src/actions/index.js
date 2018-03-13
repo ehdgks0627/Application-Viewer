@@ -1,4 +1,5 @@
 import * as TYPES from './ActionTypes';
+import axios from 'axios';
 
 export function newAlert(alertData) {
   return {

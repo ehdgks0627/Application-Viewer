@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import update from 'react-addons-update';
 import axios from 'axios';
 
-import API_SERVER_URL from '../config.js';
+import {API_SERVER_URL} from '../config';
 import blankImage from '../static/blank.png';
 import ApplicationPreview from './ApplicationPreview';
 

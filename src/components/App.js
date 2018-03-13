@@ -7,6 +7,7 @@ import Header from './Header';
 import Main from './Main';
 import Alert from './Alert';
 import * as actions from '../actions';
+import {SERVER_URL} from '../config';
 
 class App extends Component {
     constructor(props) {
@@ -16,7 +17,7 @@ class App extends Component {
         _id: ''
       };
 
-      this.socket = io.connect("http://localhost:3000");
+      this.socket = io.connect(SERVER_URL);
 
       this.socket.on('newAlert', (alertData) => {
   		   this.props.newAlert(alertData);
