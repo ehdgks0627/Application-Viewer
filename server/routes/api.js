@@ -29,8 +29,8 @@ router.post('/upload', function(req, res){
   // every time a file has been uploaded successfully,
   // rename it to it's orignal name
   form.on('file', function(field, file) {
-    const savePath = field + path.extname(file.name);
-    fs.rename(file.path, path.join(form.uploadDir, savePath));
+    const fileName = `${field}_${Date.now()}${path.extname(file.name)}`;
+    fs.rename(file.path, path.join(form.uploadDir, fileName));
 
     Application.findById(field, function(err, application) {
         if(err) {
@@ -45,7 +45,7 @@ router.post('/upload', function(req, res){
             return;
         }
 
-        application.photo = FILES_PATH + field + path.extname(file.name);
+        application.photo = `${FILES_PATH}${fileName}`;
 
         application.save(function(err, data){
             if(!err) {

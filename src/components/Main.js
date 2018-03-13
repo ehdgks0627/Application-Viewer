@@ -22,7 +22,7 @@ class Main extends Component {
         return(
           <main>
             <Switch>
-              <Route exact path='/application/:id'
+              <Route exact path='/application/:_id'
               render={(props) => (
                 <Application
                 startInterview={this.props.startInterview}
@@ -31,7 +31,9 @@ class Main extends Component {
                 {...props}
                 />)}
               />
-              <Route exact path='/list' component={ApplicationList} />
+              <Route exact path='/list'
+              component={ApplicationList}
+              />
               <Route component={NotFound} />
             </Switch>
           </main>

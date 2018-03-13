@@ -18,8 +18,8 @@ class Item extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          title: props.title,
-          content: props.content
+          title: this.props.title,
+          content: this.props.content
         };
     }
 

@@ -17,12 +17,12 @@ class App extends Component {
         this.socket = io.connect(SERVER_URL);
 
         this.socket.on('newAlert', (alertData) => {
-          if(!this.mainElement.applicationElement || (this.mainElement.applicationElement.state._id !== alertData._id))
+          if(!this.mainElement.applicationElement || (this.mainElement.applicationElement.props.match.params._id !== alertData._id)) {
               this.props.newAlert(alertData);
+          }
         });
         this.socket.on('photoUploaded', (photoData) => {
           this.props.photoUploaded(photoData);
-          //TODO subscribe in ApplicationList, Application
         });
 
         this.startInterview = this.startInterview.bind(this);

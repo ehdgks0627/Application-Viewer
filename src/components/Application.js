@@ -38,12 +38,12 @@ class Application extends Component {
             answer: '',
             startTime: null,
             endTime: null,
-            _id: this.props.match.params.id
+            _id: this.props.match.params._id
         };
     }
 
     componentDidMount() {
-        axios.get(API_SERVER_URL + '/application/' + this.props.match.params.id)
+        axios.get(API_SERVER_URL + '/application/' + this.state._id)
             .then((result) => {
               let data = result.data;
               this.setState({

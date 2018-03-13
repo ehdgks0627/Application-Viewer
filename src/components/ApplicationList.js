@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import update from 'react-addons-update';
+import update from 'immutability-helper';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
@@ -13,8 +13,8 @@ class ApplicationList extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          applications: [],
-          countPerRow: 4
+            applications: [],
+            countPerRow: 4
         };
     }
 
@@ -26,6 +26,21 @@ class ApplicationList extends Component {
                 });
             });
 
+    }
+
+    componentWillReceiveProps(nextProps, nextState) {
+        let applicationIndex = this.state.applications.findIndex(function(element) {
+            return element._id === nextProps._id;
+        });
+        if(applicationIndex !== -1 &&
+           this.state.applications[applicationIndex].photo !== nextProps.photo) {
+              this.setState({
+                  applications: update(this.state.applications, {
+                                       [applicationIndex]: {
+                                         photo: {
+                                           $set: nextProps.photo}}})
+                });
+        }
     }
 
     render() {
@@ -73,8 +88,7 @@ class ApplicationList extends Component {
 }
 
 const mapStateToProps = (state = {}) => {
-  //TODO update photo of _id
-    return { ...state };
+    return { photo: state.application.photo, _id: state.application._id };
 };
 
 export default connect(mapStateToProps)(ApplicationList);
