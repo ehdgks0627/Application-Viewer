@@ -1,15 +1,42 @@
 let express = require('express');
 let path = require('path');
+let axios = require('axios');
 let router = express.Router();
 
 let db = require('../connection');
 
+import PASSWORD from './password.js';
+
 const Application = require('../../models/Application');
 
 router.get('/sync', function(req, res) {
-  //TODO sync with layer7 db
+  axios.post('http://layer7.kr/2018/apply/api.php',
+             'password=' + PASSWORD)
+             .then((response) => {
+               let data = response.data;
+               data.forEach((currentValue) => {
+                 let column = {
+                   sid: currentValue.sid,
+                   name: currentValue.name,
+                   pnumber: currentValue.pnumber,
+                   email: currentValue.email,
+                   hobby: currentValue.hobby,
+                   strong: currentValue.strong,
+                   study: currentValue.study,
+                   profile: currentValue.profile,
+                   last: currentValue.last
+                 };
 
-  res.end();
+                 var application = new Application(column);
+
+                 application.save(function(err, data) {
+                     if(err) {
+                         console.log("Some error occurred while creating the Application. (sid : " + currentValue.sid + ")");
+                     }
+                 });
+                 res.send({message: "Success"})
+               });
+             });
 });
 
 router.get('/', function(req, res) {
@@ -18,7 +45,6 @@ router.get('/', function(req, res) {
           console.log(err);
           res.status(500).send({message: "Some error occurred while retrieving applications."});
       } else {
-        //TODO filter
           res.send(applications);
       }
   });
