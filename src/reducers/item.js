@@ -9,7 +9,6 @@ export const DELETE_STRING = "DELETE_STRING";
 
 
 export default function counter(state = initialState, action) {
-  //action.position, action.length, action.content
     switch(action.type) {
       case TYPES.INSERT_STRING:
         return { ...state, content: state.content };
