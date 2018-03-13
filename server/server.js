@@ -43,7 +43,13 @@ server.listen(port, ()=> {
 
 io.on('connection', function (socket) {
   	socket.on('newAlert', (alertData) => {
-      io.emit('newAlert', alertData);
+        io.emit('newAlert', alertData);
+  	});
+    socket.on('startTimer', (timerData) => {
+        io.emit('startTimer', timerData);
+  	});
+    socket.on('endTimer', (timerData) => {
+        io.emit('endTimer', timerData);
   	});
 });
 

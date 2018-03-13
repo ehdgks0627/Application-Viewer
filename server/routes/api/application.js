@@ -14,15 +14,15 @@ router.get('/sync', function(req, res) {
      let data = response.data;
      data.forEach((currentValue) => {
        let column = {
-         sid: currentValue.sid,
-         name: currentValue.name,
-         pnumber: currentValue.pnumber,
-         email: currentValue.email,
-         hobby: currentValue.hobby,
-         strong: currentValue.strong,
-         study: currentValue.study,
-         profile: currentValue.profile,
-         last: currentValue.last
+           sid: currentValue.sid,
+           name: currentValue.name,
+           pnumber: currentValue.pnumber,
+           email: currentValue.email,
+           hobby: currentValue.hobby,
+           strong: currentValue.strong,
+           study: currentValue.study,
+           profile: currentValue.profile,
+           last: currentValue.last
        };
 
        let application = new Application(column);
@@ -32,7 +32,7 @@ router.get('/sync', function(req, res) {
                console.log("Some error occurred while creating the Application. (sid : " + currentValue.sid + ")");
            }
        });
-       res.send({message: "Success"})
+       res.send({message: "Success"});
      });
    });
 });
@@ -87,7 +87,7 @@ router.get('/start/:_id', function(req, res) {
           if(err) {
               res.status(500).send({message: "Could not update application with id " + req.params._id});
           } else {
-              res.send({message: "Application started successfully!"});
+              res.send({startTime: data.startTime, _id: data._id});
           }
       });
   });
@@ -115,7 +115,7 @@ router.get('/end/:_id', function(req, res) {
           if(err) {
               res.status(500).send({message: "Could not update application with id " + req.params._id});
           } else {
-              res.send({message: "Application ended successfully!"});
+              res.send({endTime: data.endTime, _id: data._id});
           }
       });
   });
@@ -127,15 +127,15 @@ router.post('/', function(req, res) {
     }
 
     let data = {
-      sid: req.body.sid,
-      name: req.body.name,
-      pnumber: req.body.pnumber,
-      email: req.body.email,
-      hobby: req.body.hobby,
-      strong: req.body.strong,
-      study: req.body.study,
-      profile: req.body.profile,
-      last: req.body.last
+        sid: req.body.sid,
+        name: req.body.name,
+        pnumber: req.body.pnumber,
+        email: req.body.email,
+        hobby: req.body.hobby,
+        strong: req.body.strong,
+        study: req.body.study,
+        profile: req.body.profile,
+        last: req.body.last
     };
 
     let application = new Application(data);

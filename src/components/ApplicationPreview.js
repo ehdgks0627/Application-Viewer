@@ -2,21 +2,19 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  name: PropTypes.string,
-  sid: PropTypes.number,
-  photo: PropTypes.oneOfType([
-    PropTypes.string
-  ]),
-  _id: PropTypes.string,
-  countPerRow: PropTypes.number
+    name: PropTypes.string.isrequired,
+    sid: PropTypes.number.isrequired,
+    photo: PropTypes.string.isrequired,
+    _id: PropTypes.string.isrequired,
+    countPerRow: PropTypes.number.isrequired
 };
 
 const defaultProps = {
-  name: '',
-  sid: -1,
-  photo: '',
-  _id: '',
-  countPerRow: 4
+    name: '',
+    sid: -1,
+    photo: '',
+    _id: '',
+    countPerRow: 4
 };
 
 class ApplicationPreview extends Component {

@@ -4,4 +4,6 @@ export const PHOTO_UPLOADED = 'PHOTO_UPLOADED';
 export const NEW_ALERT = 'NEW_ALERT';
 export const NEW_ALERT_SOCKET = 'NEW_ALERT_SOCKET';
 export const START_TIMER = 'START_TIMER';
+export const START_TIMER_SOCKET = 'START_TIMER_SOCKET';
 export const END_TIMER = 'END_TIMER';
+export const END_TIMER_SOCKET = 'END_TIMER_SOCKET';

@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  content: PropTypes.string,
-  _id: PropTypes.string
+    content: PropTypes.string,
+    _id: PropTypes.string
 };
 
 const defaultProps = {
-  content: '',
-  _id: ''
+    content: '',
+    _id: ''
 };
 
 class Alert extends Component {

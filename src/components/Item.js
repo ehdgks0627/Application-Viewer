@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 const propTypes = {
-  title: PropTypes.string,
-  content: PropTypes.string,
-  isEditable: PropTypes.bool
+    title: PropTypes.string.isrequired,
+    content: PropTypes.string,
+    isEditable: PropTypes.bool.isrequired
 };
 
 const defaultProps = {
-  title: '',
-  content: '',
-  isEditable: false
+    title: '',
+    content: '',
+    isEditable: false
 };
 
 class Item extends Component {
@@ -18,8 +18,8 @@ class Item extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          title: this.props.title,
-          content: this.props.content
+            title: this.props.title,
+            content: this.props.content
         };
     }
 
@@ -27,12 +27,12 @@ class Item extends Component {
     {
       let newState = {};
       if(this.state.title !== nextProps.title) {
-        newState.title = nextProps.state;
+          newState.title = nextProps.state;
       } else if(this.state.content !== nextProps.content) {
-        newState.content = nextProps.content;
+          newState.content = nextProps.content;
       }
-      if(Object.keys(newState).length !== 0) { // if props is changed
-        this.setState(newState);
+      if(Object.keys(newState).length !== 0) {
+          this.setState(newState);
       }
     }
 

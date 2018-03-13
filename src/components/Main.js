@@ -8,12 +8,13 @@ import NotFound from './NotFound';
 
 
 const propTypes = {
-  startInterview: PropTypes.func
+    startInterview: PropTypes.func.isrequired,
+    endInterview: PropTypes.func.isrequired
 };
 
 const defaultProps = {
-  startInterview: () => {console.log('startInterview is not defined')},
-  endInterview: () => {console.log('endInterview is not defined')}
+    startInterview: () => {console.log('startInterview is not defined')},
+    endInterview: () => {console.log('endInterview is not defined')}
 };
 
 class Main extends Component {

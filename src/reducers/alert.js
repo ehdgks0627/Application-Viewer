@@ -1,11 +1,6 @@
 import * as TYPES from '../actions/ActionTypes';
 
-const initialState = {
-    content: '',
-    _id: ''
-};
-
-export default function alert(state = initialState, action) {
+export default function alert(state = {}, action) {
     switch(action.type) {
       case TYPES.NEW_ALERT:
         return { content: action.content, _id: action._id };

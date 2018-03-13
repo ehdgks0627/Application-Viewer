@@ -8,13 +8,13 @@ import blankImage from '../static/blank.png';
 import { SERVER_URL, API_SERVER_URL } from '../config';
 
 const propTypes = {
-  startInterview: PropTypes.func.isrequired,
-  endInterview: PropTypes.func.isrequired
+    startInterview: PropTypes.func.isrequired,
+    endInterview: PropTypes.func.isrequired
 };
 
 const defaultProps = {
-  startInterview: () => {console.log('startInterview is not defined')},
-  endInterview: () => {console.log('endInterview is not defined')}
+    startInterview: () => {console.log('startInterview is not defined')},
+    endInterview: () => {console.log('endInterview is not defined')}
 };
 
 class Application extends Component {
@@ -69,9 +69,23 @@ class Application extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextState) {
+
         if(nextProps._id === this.state._id) {
-            if(nextProps.photo !== this.state.photo) {
-              this.setState({photo: nextProps.photo});
+            let newState = {};
+            if('photo' in nextProps &&
+               nextProps.photo !== this.state.photo) {
+                newState.photo = nextProps.photo;
+            }
+            if('startTime' in nextProps &&
+               nextProps.startTime !== this.state.startTime) {
+                newState.startTime = nextProps.startTime;
+            }
+            if('endTime' in nextProps &&
+               nextProps.endTime !== this.state.endTime) {
+                newState.endTime = nextProps.endTime;
+            }
+            if(Object.keys(newState).length !== 0) {
+                this.setState(newState);
             }
         }
     }
@@ -79,6 +93,7 @@ class Application extends Component {
     render() {
       let startInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.startInterview(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button>);
       let endInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.endInterview(this.state._id)}}>면접 끝내기</button>);
+      let doneInterviewButton = (<button className="btn-primary mt-3">면접 종료됨</button>)
 
       let detailview = (
           <div className="py-3">
@@ -121,11 +136,14 @@ class Application extends Component {
                       <br /> 이메일 : {this.state.email}
                     </p>
                   </ul>
-                  {this.state.startTime ? endInterviewButton : startInterviewButton}
+                  {
+                    this.state.startTime ?
+                    this.state.endTime ? doneInterviewButton : endInterviewButton :
+                    startInterviewButton
+                  }
                   <br />
 
-
-                  {this.state.startTime}경과 시간
+                  경과 시간 : {this.state.startTime}
                   <hr />
                   <ul className="list-group">
                     <Item title={"취미"} content={this.state.hobby} isEditable={false} />
@@ -157,7 +175,12 @@ Application.propTypes = propTypes;
 Application.defaultProps = defaultProps;
 
 const mapStateToProps = (state = {}) => {
-    return { photo: state.application.photo, _id: state.application._id };
+    return {
+        photo: state.application.photo,
+        startTime: state.application.startTime,
+        endTime: state.application.endTime,
+        _id: state.application._id
+    };
 };
 
 export default connect(mapStateToProps)(Application);
