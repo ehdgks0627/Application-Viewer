@@ -8,15 +8,16 @@ class App extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        alert: ''
+        content: ''
       };
 
       this.makeAlert = this.makeAlert.bind(this);
     }
 
-    makeAlert(content) {
+    makeAlert(content, _id) {
       this.setState({
-        alert: <Alert content={content} />
+        content: content,
+        _id: _id
       });
     }
 
@@ -24,8 +25,8 @@ class App extends Component {
         return(
             <div>
               <Header />
-              <Main />
-              {this.state.alert}
+              <Main makeAlert={this.makeAlert} />
+              {(this.state.content && this.state._id) ? <Alert content={this.state.content} _id={this.state._id} /> : <div></div> }
             </div>
         );
     }

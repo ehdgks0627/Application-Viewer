@@ -7,11 +7,11 @@ import blankImage from '../static/blank.png';
 import API_SERVER_URL from '../config.js';
 
 const propTypes = {
-
+  makeAlert: PropTypes.func
 };
 
 const defaultProps = {
-
+  makeAlert: () => {console.log('makeAlert is not defined')}
 };
 
 class Application extends Component {
@@ -34,7 +34,8 @@ class Application extends Component {
             special: [],
             answer: '',
             startTime: null,
-            endTime: null
+            endTime: null,
+            _id: this.props.match.params.id
         };
     }
 
@@ -60,7 +61,6 @@ class Application extends Component {
                   startTime: data.startTime,
                   endTime: data.endTime
               });
-              //TODO notify setState changed to Item Model {"title": "취미", "content": data.hobby}
             })
             .catch((error) => { window.location = '/list'; });
     }
@@ -86,6 +86,7 @@ class Application extends Component {
                       <br /> 이메일 : {this.state.email}
                     </p>
                   </ul>
+                  <button className="btn-primary mt-3" onClick={() => {this.props.makeAlert(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button>
                   <hr />
                   <ul className="list-group">
                     <Item title={"취미"} content={this.state.hobby} isEditable={false} />
