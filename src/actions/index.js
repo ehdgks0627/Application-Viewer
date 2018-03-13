@@ -19,3 +19,11 @@ export function newAlertSocket(socket, content, _id) {
     socket.emit('newAlert', alertData);
   };
 }
+
+export function photoUploaded(photoData) {
+  return {
+    type: TYPES.PHOTO_UPLOADED,
+    photo: photoData.photo,
+    _id: photoData._id
+  };
+}

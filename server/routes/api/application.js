@@ -1,42 +1,40 @@
-let express = require('express');
-let path = require('path');
-let axios = require('axios');
+import PASSWORD from './password.js';
+import express from 'express';
+import path from 'path';
+import axios from 'axios';
+import { db } from '../connection';
+import Application from '../../models/Application';
+
 let router = express.Router();
 
-let db = require('../connection');
-
-import PASSWORD from './password.js';
-
-const Application = require('../../models/Application');
-
 router.get('/sync', function(req, res) {
-  axios.post('http://layer7.kr/2018/apply/api.php',
-             'password=' + PASSWORD)
-             .then((response) => {
-               let data = response.data;
-               data.forEach((currentValue) => {
-                 let column = {
-                   sid: currentValue.sid,
-                   name: currentValue.name,
-                   pnumber: currentValue.pnumber,
-                   email: currentValue.email,
-                   hobby: currentValue.hobby,
-                   strong: currentValue.strong,
-                   study: currentValue.study,
-                   profile: currentValue.profile,
-                   last: currentValue.last
-                 };
+    axios.post('http://layer7.kr/2018/apply/api.php',
+               'password=' + PASSWORD)
+   .then((response) => {
+     let data = response.data;
+     data.forEach((currentValue) => {
+       let column = {
+         sid: currentValue.sid,
+         name: currentValue.name,
+         pnumber: currentValue.pnumber,
+         email: currentValue.email,
+         hobby: currentValue.hobby,
+         strong: currentValue.strong,
+         study: currentValue.study,
+         profile: currentValue.profile,
+         last: currentValue.last
+       };
 
-                 var application = new Application(column);
+       let application = new Application(column);
 
-                 application.save(function(err, data) {
-                     if(err) {
-                         console.log("Some error occurred while creating the Application. (sid : " + currentValue.sid + ")");
-                     }
-                 });
-                 res.send({message: "Success"})
-               });
-             });
+       application.save(function(err, data) {
+           if(err) {
+               console.log("Some error occurred while creating the Application. (sid : " + currentValue.sid + ")");
+           }
+       });
+       res.send({message: "Success"})
+     });
+   });
 });
 
 router.get('/', function(req, res) {
@@ -50,8 +48,8 @@ router.get('/', function(req, res) {
   });
 });
 
-router.get('/:sid', function(req, res) {
-    Application.findById(req.params.sid, function(err, application) {
+router.get('/:_id', function(req, res) {
+    Application.findById(req.params._id, function(err, application) {
       if(err) {
           console.log(err);
           res.status(500).send({message: "Some error occurred while retrieving applications."});
@@ -62,24 +60,24 @@ router.get('/:sid', function(req, res) {
         }
         else
         {
-          return res.status(404).send({message: "Application not found with id " + req.params.sid});
+          return res.status(404).send({message: "Application not found with id " + req.params._id});
         }
       }
     });
 });
 
-router.get('/start/:sid', function(req, res) {
-  Application.findById(req.params.sid, function(err, application) {
+router.get('/start/:_id', function(req, res) {
+  Application.findById(req.params._id, function(err, application) {
       if(err) {
           console.log(err);
           if(err.kind === 'ObjectId') {
-              return res.status(404).send({message: "Application not found with id " + req.params.sid});
+              return res.status(404).send({message: "Application not found with id " + req.params._id});
           }
-          return res.status(500).send({message: "Error finding application with id " + req.params.sid});
+          return res.status(500).send({message: "Error finding application with id " + req.params._id});
       }
 
       if(!application) {
-          return res.status(404).send({message: "Application not found with id " + req.params.sid});
+          return res.status(404).send({message: "Application not found with id " + req.params._id});
       }
       if(!application.startTime) {
           application.startTime = new Date();
@@ -87,7 +85,7 @@ router.get('/start/:sid', function(req, res) {
 
       application.save(function(err, data){
           if(err) {
-              res.status(500).send({message: "Could not update application with id " + req.params.sid});
+              res.status(500).send({message: "Could not update application with id " + req.params._id});
           } else {
               res.send({message: "Application started successfully!"});
           }
@@ -95,25 +93,27 @@ router.get('/start/:sid', function(req, res) {
   });
 });
 
-router.get('/end/:sid', function(req, res) {
-  Application.findById(req.params.sid, function(err, application) {
+router.get('/end/:_id', function(req, res) {
+  Application.findById(req.params._id, function(err, application) {
       if(err) {
           console.log(err);
           if(err.kind === 'ObjectId') {
-              return res.status(404).send({message: "Application not found with id " + req.params.sid});
+              return res.status(404).send({message: "Application not found with id " + req.params._id});
           }
-          return res.status(500).send({message: "Error finding application with id " + req.params.sid});
+          return res.status(500).send({message: "Error finding application with id " + req.params._id});
       }
 
       if(!application) {
-          return res.status(404).send({message: "Application not found with id " + req.params.sid});
+          return res.status(404).send({message: "Application not found with id " + req.params._id});
       }
 
-      application.endTime = new Date();
+      if(!application.endTime) {
+          application.endTime = new Date();
+      }
 
       application.save(function(err, data){
           if(err) {
-              res.status(500).send({message: "Could not update application with id " + req.params.sid});
+              res.status(500).send({message: "Could not update application with id " + req.params._id});
           } else {
               res.send({message: "Application ended successfully!"});
           }
@@ -138,7 +138,7 @@ router.post('/', function(req, res) {
       last: req.body.last
     };
 
-    var application = new Application(data);
+    let application = new Application(data);
 
     application.save(function(err, data) {
         if(err) {
@@ -150,18 +150,18 @@ router.post('/', function(req, res) {
     });
 });
 
-router.delete('/:sid', function(req, res) {
-  Application.findByIdAndRemove(req.params.sid, function(err, application) {
+router.delete('/:_id', function(req, res) {
+  Application.findByIdAndRemove(req.params._id, function(err, application) {
         if(err) {
             console.log(err);
             if(err.kind === 'ObjectId') {
-                return res.status(404).send({message: "Application not found with id " + req.params.sid});
+                return res.status(404).send({message: "Application not found with id " + req.params._id});
             }
-            return res.status(500).send({message: "Could not delete application with id " + req.params.sid});
+            return res.status(500).send({message: "Could not delete application with id " + req.params._id});
         }
 
         if(!application) {
-            return res.status(404).send({message: "Application not found with id " + req.params.sid});
+            return res.status(404).send({message: "Application not found with id " + req.params._id});
         }
 
         res.send({message: "Application deleted successfully!"});

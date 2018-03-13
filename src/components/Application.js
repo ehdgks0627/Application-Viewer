@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import Item from './Item';
 import blankImage from '../static/blank.png';
@@ -67,6 +68,14 @@ class Application extends Component {
             .catch((error) => { window.location = '/list'; });
     }
 
+    componentWillReceiveProps(nextProps, nextState) {
+        if(nextProps._id === this.state._id) {
+            if(nextProps.photo !== this.state.photo) {
+              this.setState({photo: nextProps.photo});
+            }
+        }
+    }
+
     render() {
       let startInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.startInterview(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button>);
       let endInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.endInterview(this.state._id)}}>면접 끝내기</button>);
@@ -79,10 +88,28 @@ class Application extends Component {
                 <div className="col-md-8">
                   <div className="form-group">
                     <center>
+                        <input
+                        name="profile"
+                        type="file"
+                        style={{"display": "none"}}
+                        accept="image/*"
+                        ref={(imageInput => {this.imageInput = imageInput;})}
+                        onChange={(event)=> {
+                            if(event.target.value) {
+                                let data = new FormData();
+                                data.append(this.state._id, event.target.files[0], event.target.files[0].name);
+                                const config = {
+                                    headers: { 'content-type': 'multipart/form-data' }
+                                }
+                                axios.post(API_SERVER_URL + '/upload', data, config)
+                                .then((response) => {})
+                                .catch((error) => {console.log(error);});
+                            }
+                        }} />
                       <img
                       src={this.state.photo ? this.state.photo : blankImage}
                       style={{"maxWidth": "100%", "height": "150px"}}
-                      onClick={() => {alert('TODO')}} />
+                      onClick={() => {this.imageInput.click()}} />
                     </center>
                   </div>
                   <br />
@@ -125,7 +152,12 @@ class Application extends Component {
         );
     }
 }
+
 Application.propTypes = propTypes;
 Application.defaultProps = defaultProps;
 
-export default Application;
+const mapStateToProps = (state = {}) => {
+    return { photo: state.application.photo, _id: state.application._id };
+};
+
+export default connect(mapStateToProps)(Application);

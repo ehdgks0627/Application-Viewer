@@ -1,16 +1,9 @@
 import * as TYPES from '../actions/ActionTypes';
 
-const initialState = {
-
-};
-
-export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
-
-
-export default function counter(state = initialState, action) {
+export default function counter(state = {}, action) {
     switch(action.type) {
-      case TYPES.UPLOAD_PHOTO:
-        return { ...state, photo: action.photo };
+      case TYPES.PHOTO_UPLOADED:
+        return { ...state, photo: action.photo, _id: action._id };
       default:
         return state;
     }

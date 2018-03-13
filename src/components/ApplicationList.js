@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import update from 'react-addons-update';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 import { API_SERVER_URL } from '../config';
 import blankImage from '../static/blank.png';
@@ -71,4 +72,9 @@ class ApplicationList extends Component {
     }
 }
 
-export default ApplicationList;
+const mapStateToProps = (state = {}) => {
+  //TODO update photo of _id
+    return { ...state };
+};
+
+export default connect(mapStateToProps)(ApplicationList);

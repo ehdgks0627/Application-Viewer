@@ -19,7 +19,11 @@ class App extends Component {
         this.socket.on('newAlert', (alertData) => {
           if(!this.mainElement.applicationElement || (this.mainElement.applicationElement.state._id !== alertData._id))
               this.props.newAlert(alertData);
-          });
+        });
+        this.socket.on('photoUploaded', (photoData) => {
+          this.props.photoUploaded(photoData);
+          //TODO subscribe in ApplicationList, Application
+        });
 
         this.startInterview = this.startInterview.bind(this);
         this.endInterview = this.endInterview.bind(this);
@@ -55,7 +59,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state = {}) => {
-    return { ...state, content: state.alert.content, _id: state.alert._id };
+    return { content: state.alert.content, _id: state.alert._id };
 };
 
 const mapDispatchToProps = (dispatch) => {

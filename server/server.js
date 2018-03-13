@@ -1,16 +1,13 @@
 import express from 'express';
-
+import http from 'http';
+import path from 'path';
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import socketServer from 'socket.io';
 import api from './routes/api';
 import socket from './routes/socket';
 
-const http = require('http');
-const path = require('path');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const socketServer = require('socket.io');
-
 const app = express();
-
 const port = 3000;
 
 //morgan으로 로깅
@@ -33,8 +30,8 @@ app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, './../public/index.html'));
 });
 
-var server = http.createServer(app);
-var io = socketServer(server);
+let server = http.createServer(app);
+export let io = socketServer(server);
 
 server.listen(port, ()=> {
     console.log("Express & SocketIO listening on port");
@@ -45,8 +42,9 @@ server.listen(port, ()=> {
 /***************************************************************************************** */
 
 io.on('connection', function (socket) {
-
   	socket.on('newAlert', (alertData) => {
       io.emit('newAlert', alertData);
   	});
 });
+
+module.exports = {io: io};
