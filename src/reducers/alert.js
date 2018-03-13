@@ -1,16 +1,14 @@
 import * as TYPES from '../actions/ActionTypes';
 
 const initialState = {
-    content: ''
+    content: '',
+    _id: ''
 };
 
-export const ALERT_APPLICANT = "ALERT_APPLICANT";
-
-
-export default function counter(state = initialState, action) {
+export default function alert(state = initialState, action) {
     switch(action.type) {
-      case TYPES.ALERT_APPLICANT:
-        return { ...state, content: action.content };
+      case TYPES.NEW_ALERT:
+        return { content: action.content, _id: action._id };
       default:
         return state;
     }

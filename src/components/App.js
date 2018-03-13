@@ -1,24 +1,36 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import io from 'socket.io-client';
+import { bindActionCreators } from 'redux';
 
 import Header from './Header';
 import Main from './Main';
 import Alert from './Alert';
+import * as actions from '../actions';
 
 class App extends Component {
     constructor(props) {
       super(props);
       this.state = {
-        content: ''
+        content: '',
+        _id: ''
       };
+
+      this.socket = io.connect("http://localhost:3000");
+
+      this.socket.on('newAlert', (alertData) => {
+  		   this.props.newAlert(alertData);
+  	   });
 
       this.makeAlert = this.makeAlert.bind(this);
     }
 
+   componentWillUnmount() {
+       this.socket.disconnect();
+   }
+
     makeAlert(content, _id) {
-      this.setState({
-        content: content,
-        _id: _id
-      });
+      this.props.newAlertSocket(this.socket, content, _id);
     }
 
     render() {
@@ -26,10 +38,21 @@ class App extends Component {
             <div>
               <Header />
               <Main makeAlert={this.makeAlert} />
-              {(this.state.content && this.state._id) ? <Alert content={this.state.content} _id={this.state._id} /> : <div></div> }
+              {(this.props.content && this.props._id) ? <Alert content={this.props.content} _id={this.props._id} /> : <div></div> }
             </div>
         );
     }
 }
 
-export default App;
+const mapStateToProps = (state = {}) => {
+  return {
+    content: state.alert.content,
+    _id: state.alert._id
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators(actions, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

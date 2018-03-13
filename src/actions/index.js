@@ -1,20 +1,19 @@
 import * as TYPES from './ActionTypes';
 
-export function incrementNumber() {
+export function newAlert(alertData) {
   return {
-    "type": TYPES.INCREMENT_NUMBER
+    type: TYPES.NEW_ALERT,
+    content: alertData.content,
+    _id: alertData._id
   };
 }
 
-export function decrementNumber() {
-  return {
-    "type": TYPES.DECREMENT_NUMBER
-  };
-}
-
-export function setColor(color) {
-  return {
-    "type": TYPES.SET_COLOR,
-    "color": color
+export function newAlertSocket(socket, content, _id) {
+  return (dispatch) => {
+    let alertData = {
+      content: content,
+      _id: _id
+    };
+    socket.emit('newAlert', alertData);
   };
 }
