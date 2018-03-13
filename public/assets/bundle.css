@@ -1,4 +1,4 @@
-/*!
+@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);/*!
 * Based on Bootstrap v4.0.0 (https://getbootstrap.com) 
 */
 /*!
@@ -6323,4 +6323,7 @@ html,body {
     left: 50%;
     bottom: 20px;
     text-align: center;
+}
+body {
+  font-family: 'Noto Sans KR';
 }

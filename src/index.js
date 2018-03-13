@@ -11,6 +11,7 @@ import reducers from './reducers';
 import './style/theme.css';
 import './style/theme.scss';
 import './style/alert.css';
+import './style/font.css';
 
 
 const store = createStore(reducers);
