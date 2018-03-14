@@ -30,15 +30,33 @@ class ApplicationPreview extends Component {
     }
 
     render() {
+        let photoContainerStyle = {
+            'display': 'table'
+        };
+
+        let photoInnerContainerStyle = {
+            'display': 'table-cell',
+            'vertical-align': 'middle',
+            'width': '10em',
+            'height': '10em',
+        };
+
         let photoStyle = {
-          'max-width': '200px',
-          'height': '100%'
+            'width': 'auto',
+            'height': 'auto',
+            'max-width': '100%',
+            'max-height': '100%',
+            'margin': '0 auto'
         };
 
         return(
           <div className={"card col-md-" + (12 / this.props.countPerRow)} onClick={this.onClick}>
             <center>
-              <img className="card-img-top" src={this.props.photo} style={photoStyle} />
+              <div style={photoContainerStyle}>
+                <div style={photoInnerContainerStyle}>
+                  <img className="card-img-top" src={this.props.photo} style={photoStyle} />
+                </div>
+              </div>
             </center>
             <ul className="list-group list-group-flush">
               <li className="list-group-item">
