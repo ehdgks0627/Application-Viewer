@@ -32,8 +32,8 @@ router.get('/sync', function(req, res) {
                console.log("Some error occurred while creating the Application. (sid : " + currentValue.sid + ")");
            }
        });
-       res.send({message: "Success"});
      });
+     res.send({message: "Success"});
    });
 });
 
