@@ -12,11 +12,9 @@ class Header extends Component {
               <div className="collapse navbar-collapse text-center justify-content-center" id="navbarHeader">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <Link
-                    className="nav-link"
-                    to="/list">
-                    지원서 리스트
-                    </Link>
+                    <a href="/list" className="nav-link">
+                      지원서 리스트
+                    </a>
                   </li>
                 </ul>
               </div>
