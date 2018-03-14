@@ -2,19 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const propTypes = {
-
-};
-
-const defaultProps = {
-
-};
-
 class Header extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     render() {
         return(
@@ -24,10 +12,11 @@ class Header extends Component {
               <div className="collapse navbar-collapse text-center justify-content-center" id="navbarHeader">
                 <ul className="navbar-nav">
                   <li className="nav-item">
-                    <Link className="nav-link" to="/list">지원서 페이지</Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link className="nav-link" to="/list">지원자 확인</Link>
+                    <Link
+                    className="nav-link"
+                    to="/list">
+                    지원서 리스트
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -36,7 +25,5 @@ class Header extends Component {
         );
     }
 }
-Header.propTypes = propTypes;
-Header.defaultProps = defaultProps;
 
 export default Header;
