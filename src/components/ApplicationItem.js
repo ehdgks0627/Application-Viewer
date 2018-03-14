@@ -13,7 +13,7 @@ const defaultProps = {
     isEditable: false
 };
 
-class Item extends Component {
+class ApplicationItem extends Component {
 
     constructor(props) {
         super(props);
@@ -39,14 +39,14 @@ class Item extends Component {
     render() {
         return(
             <li className="list-group-item">
-             <h4>{this.state.title}</h4>
-             <br />
-             {this.state.content}
+               <h4>{this.state.title}</h4>
+               <br />
+               {this.state.content}
             </li>
         );
     }
 }
-Item.propTypes = propTypes;
-Item.defaultProps = defaultProps;
+ApplicationItem.propTypes = propTypes;
+ApplicationItem.defaultProps = defaultProps;
 
-export default Item;
+export default ApplicationItem;
