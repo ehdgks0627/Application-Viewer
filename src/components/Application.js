@@ -23,20 +23,20 @@ class Application extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            sid: 10000, //학번
-            pnumber: '010-0000-0000',
-            email: '',
-            hobby: '',
-            strong: '',
-            study: '',
-            profile: '',
-            last: '',
-            photo: '',
+            name: null,
+            sid: null, //학번
+            pnumber: null,
+            email: null,
+            hobby: null,
+            strong: null,
+            study: null,
+            profile: null,
+            last: null,
+            photo: null,
             questionList: [],
             major: [],
             special: [],
-            answer: '',
+            answer: null,
             startTime: null,
             endTime: null,
             _id: this.props.match.params._id
