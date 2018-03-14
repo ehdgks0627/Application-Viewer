@@ -21,9 +21,9 @@ const root = document.getElementById("root");
 
 ReactDom.render(
   (<Provider store={store}>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+      <BrowserRouter>
+          <App />
+      </BrowserRouter>
   </Provider>),
   root
 );
