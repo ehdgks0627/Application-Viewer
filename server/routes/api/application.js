@@ -80,7 +80,7 @@ router.get('/start/:_id', function(req, res) {
           return res.status(404).send({message: "Application not found with id " + req.params._id});
       }
       if(!application.startTime) {
-          application.startTime = new Date();
+          application.startTime = Date.now();
       }
 
       application.save(function(err, data){
@@ -108,7 +108,7 @@ router.get('/end/:_id', function(req, res) {
       }
 
       if(!application.endTime) {
-          application.endTime = new Date();
+          application.endTime = Date.now();
       }
 
       application.save(function(err, data){

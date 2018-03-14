@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import Item from './Item';
+import StopWatch from './StopWatch';
 import blankImage from '../static/blank.png';
 import { SERVER_URL, API_SERVER_URL } from '../config';
 
@@ -143,19 +144,19 @@ class Application extends Component {
                   }
                   <br />
 
-                  경과 시간 : {this.state.startTime}
+                  <StopWatch caption="경과 시간 : " startTime={this.state.startTime} endTime={this.state.endTime} />
                   <hr />
                   <ul className="list-group">
-                    <Item title={"취미"} content={this.state.hobby} isEditable={false} />
-                    <Item title={"특기"} content={this.state.strong} isEditable={false} />
-                    <Item title={"공부한 것"} content={this.state.study} isEditable={false} />
-                    <Item title={"자기소개"} content={this.state.profile} isEditable={false} />
-                    <Item title={"마지막으로 하고 싶은 말"} content={this.state.last} isEditable={false} />
+                    <Item title="취미" content={this.state.hobby} isEditable={false} />
+                    <Item title="특기" content={this.state.strong} isEditable={false} />
+                    <Item title="공부한 것" content={this.state.study} isEditable={false} />
+                    <Item title="자기소개" content={this.state.profile} isEditable={false} />
+                    <Item title="마지막으로 하고 싶은 말" content={this.state.last} isEditable={false} />
                     <br />
-                    <Item title={"질문 리스트"} content={this.state.questionList} isEditable={true} />
-                    <Item title={"전공 실력"} content={this.state.major} isEditable={true} />
-                    <Item title={"특이사항"} content={this.state.special} isEditable={true} />
-                    <Item title={"답변"} content={this.state.answer} isEditable={true} />
+                    <Item title="질문 리스트" content={this.state.questionList} isEditable={true} />
+                    <Item title="전공 실력" content={this.state.major} isEditable={true} />
+                    <Item title="특이사항" content={this.state.special} isEditable={true} />
+                    <Item title="답변" content={this.state.answer} isEditable={true} />
                   </ul>
                   </div>
                 <div className="col-md-2" />

@@ -10,6 +10,4 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 });
 
-mongoose.connect('mongodb://localhost/mongodb_tutorial');
-
 module.exports = db;
