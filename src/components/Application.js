@@ -70,18 +70,20 @@ class Application extends Component {
     }
 
     componentWillReceiveProps(nextProps, nextState) {
-
         if(nextProps._id === this.state._id) {
             let newState = {};
             if('photo' in nextProps &&
+               nextProps.photo &&
                nextProps.photo !== this.state.photo) {
                 newState.photo = nextProps.photo;
             }
             if('startTime' in nextProps &&
+               nextProps.startTime &&
                nextProps.startTime !== this.state.startTime) {
                 newState.startTime = nextProps.startTime;
             }
             if('endTime' in nextProps &&
+               nextProps.endTime &&
                nextProps.endTime !== this.state.endTime) {
                 newState.endTime = nextProps.endTime;
             }
@@ -142,8 +144,6 @@ class Application extends Component {
                     this.state.endTime ? doneInterviewButton : endInterviewButton :
                     startInterviewButton
                   }
-                  <br />
-
                   <StopWatch caption="경과 시간 : " startTime={this.state.startTime} endTime={this.state.endTime} />
                   <hr />
                   <ul className="list-group">

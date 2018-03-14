@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 const propTypes = {
     caption: PropTypes.string,
-    startTime: PropTypes.instanceOf(Date),
-    endTime: PropTypes.instanceOf(Date)
+    startTime: PropTypes.number,
+    endTime: PropTypes.number
 };
 
 const defaultProps = {
-    caption: '',
+    caption: null,
     startTime: null,
     endTime: null
 };
@@ -55,7 +55,7 @@ class StopWatch extends Component {
     }
 
     render() {
-        return (<div>{this.state.time ? this.props.caption + this.state.time : ''}</div>);
+        return (<div>{this.state.time ? this.props.caption + this.state.time : null}</div>);
     }
 }
 StopWatch.propTypes = propTypes;

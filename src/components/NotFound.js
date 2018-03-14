@@ -9,9 +9,9 @@ class NotFound extends Component {
     }
 
     render() {
-      return (
-        <div>NotFound</div>
-      );
+        return (
+            <div>NotFound</div>
+        );
     }
 }
 

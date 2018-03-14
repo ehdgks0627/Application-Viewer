@@ -10,10 +10,10 @@ const propTypes = {
 };
 
 const defaultProps = {
-    name: '',
+    name: null,
     sid: -1,
-    photo: '',
-    _id: '',
+    photo: null,
+    _id: null,
     countPerRow: 4
 };
 
@@ -26,7 +26,7 @@ class ApplicationPreview extends Component {
     }
 
     onClick() {
-      window.location = '/application/' + this.props._id;
+        window.location = '/application/' + this.props._id;
     }
 
     render() {
