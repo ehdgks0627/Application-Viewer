@@ -1,9 +1,9 @@
-import PASSWORD from '../password.js';
 import express from 'express';
 import path from 'path';
 import axios from 'axios';
-import { db } from './connection';
 import Application from '../models/Application';
+import PASSWORD from '../password.js';
+import { db } from '../connection';
 
 let router = express.Router();
 
