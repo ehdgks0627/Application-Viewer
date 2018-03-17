@@ -6,20 +6,20 @@ class Header extends Component {
 
     render() {
         return(
-          <nav className="navbar navbar-expand-md bg-dark navbar-dark">
-            <div className="container">
-              <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
-              <div className="collapse navbar-collapse text-center justify-content-center" id="navbarHeader">
-                <ul className="navbar-nav">
-                  <li className="nav-item">
-                    <a href="/list" className="nav-link">
-                      지원서 리스트
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </nav>
+            <nav className="navbar navbar-expand-md bg-dark navbar-dark">
+                <div className="container">
+                    <button className="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"> <span className="navbar-toggler-icon"></span> </button>
+                    <div className="collapse navbar-collapse text-center justify-content-center" id="navbarHeader">
+                        <ul className="navbar-nav">
+                            <li className="nav-item">
+                                <a href="/list" className="nav-link">
+                                    지원서 리스트
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
         );
     }
 }

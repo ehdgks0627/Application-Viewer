@@ -20,10 +20,10 @@ const store = createStore(reducers, applyMiddleware(thunk));
 const root = document.getElementById("root");
 
 ReactDom.render(
-  (<Provider store={store}>
-      <BrowserRouter>
-          <App />
-      </BrowserRouter>
-  </Provider>),
-  root
+    (<Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>),
+    root
 );

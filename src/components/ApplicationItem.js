@@ -93,7 +93,7 @@ const mapStateToProps = (state = {}) => {
         item_key: state.applicationItem.key,
         item_title: state.applicationItem.title,
         item_content: state.applicationItem.content
-      };
+    };
 };
 
 export default connect(mapStateToProps)(ApplicationItem);

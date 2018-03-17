@@ -18,22 +18,22 @@ class StopWatch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          time: null,
-          intervalId: null
+            time: null,
+            intervalId: null
         };
 
         this.updateTimeGap = this.updateTimeGap.bind(this);
     }
 
     componentDidMount() {
-       var intervalId = setInterval(this.updateTimeGap, 100);
-       // store intervalId in the state so it can be accessed later:
-       this.setState({intervalId: intervalId});
+        var intervalId = setInterval(this.updateTimeGap, 100);
+        // store intervalId in the state so it can be accessed later:
+        this.setState({intervalId: intervalId});
     }
 
     componentWillUnmount() {
-       // use intervalId from the state to clear the interval
-       clearInterval(this.state.intervalId);
+        // use intervalId from the state to clear the interval
+        clearInterval(this.state.intervalId);
     }
 
     updateTimeGap() {
@@ -43,7 +43,7 @@ class StopWatch extends Component {
         } else if(this.props.startTime) {
             timeGap = new Date() - this.props.startTime;
         } else {
-          return;
+            return;
         }
         timeGap = Math.floor(timeGap / 1000);
         let seconds = ("00" + timeGap % 60).slice(-2);

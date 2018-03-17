@@ -50,23 +50,23 @@ class ApplicationPreview extends Component {
         };
 
         return(
-          <div className={"card col-md-" + (12 / this.props.countPerRow)} onClick={this.onClick}>
-            <center>
-              <div style={photoContainerStyle}>
-                <div style={photoInnerContainerStyle}>
-                  <img className="card-img-top" src={this.props.photo} style={photoStyle} />
-                </div>
-              </div>
-            </center>
-            <ul className="list-group list-group-flush">
-              <li className="list-group-item">
-                <div className="row" style={{'font-size': '0.8em'}}>
-                  <div className="col-md-6">{this.props.name}</div>
-                  <div className="col-md-6">{this.props.sid}</div>
-                </div>
-              </li>
-            </ul>
-          </div>
+            <div className={"card col-md-" + (12 / this.props.countPerRow)} onClick={this.onClick}>
+                <center>
+                    <div style={photoContainerStyle}>
+                        <div style={photoInnerContainerStyle}>
+                            <img className="card-img-top" src={this.props.photo} style={photoStyle} />
+                        </div>
+                    </div>
+                </center>
+                <ul className="list-group list-group-flush">
+                    <li className="list-group-item">
+                        <div className="row" style={{'font-size': '0.8em'}}>
+                            <div className="col-md-6">{this.props.name}</div>
+                            <div className="col-md-6">{this.props.sid}</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         );
     }
 }

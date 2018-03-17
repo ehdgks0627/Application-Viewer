@@ -74,31 +74,32 @@ class ApplicationItemDetail extends Component {
 
     render() {
         let divItem = (<div style={{'word-wrap': 'break-word'}}>{this.state.content}</div>);
-        let textareaItem = (<div>
-          <textarea
-          style={{'width': '100%'}}
-          className="form-control"
-          rows="5"
-          ref={(editTextarea) => {this.editTextarea = editTextarea;}}>{this.state.content}
-          </textarea>
-        </div>);
+        let textareaItem = (
+            <div>
+                <textarea
+                style={{'width': '100%'}}
+                className="form-control"
+                rows="5"
+                ref={(editTextarea) => {this.editTextarea = editTextarea;}}>{this.state.content}
+                </textarea>
+            </div>);
         return (
-          <li className="list-group-item">
-            {this.state.isEditing ? textareaItem : divItem}
-            <div style={{'float': 'right'}}>
-              {this.state.isEditing ?
-              <div>
-                <i className="material-icons" onClick={this.onEdit}>done</i>
-                <i className="material-icons" onClick={this.onCancelEdit} style={{'margin-left': '0.5em'}}>cancel</i>
-              </div>
-              :
-              <div>
-                <i className="material-icons" onClick={this.onBeginEdit}>border_color</i>
-                <i className="material-icons" onClick={this.onRemove} style={{'margin-left': '0.5em'}}>cancel</i>
-              </div>
-              }
-            </div>
-          </li>);
+            <li className="list-group-item">
+                {this.state.isEditing ? textareaItem : divItem}
+                <div style={{'float': 'right'}}>
+                    {this.state.isEditing ?
+                    <div>
+                        <i className="material-icons" onClick={this.onEdit}>done</i>
+                        <i className="material-icons" onClick={this.onCancelEdit} style={{'margin-left': '0.5em'}}>cancel</i>
+                    </div>
+                    :
+                    <div>
+                        <i className="material-icons" onClick={this.onBeginEdit}>border_color</i>
+                        <i className="material-icons" onClick={this.onRemove} style={{'margin-left': '0.5em'}}>cancel</i>
+                    </div>
+                    }
+                </div>
+            </li>);
     }
 }
 

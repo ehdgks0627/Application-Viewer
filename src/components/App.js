@@ -77,7 +77,7 @@ class App extends Component {
         } else {
             return nextProps;
         }
-      }
+    }
 
 
     componentWillUnmount() {
@@ -93,28 +93,28 @@ class App extends Component {
             this.props.newAlertSocket(socket, alertData);
         });
         axios.get(API_SERVER_URL + '/application/start/' + _id)
-        .then((response) => {
-              let timerData = {
-                  startTime: response.data.startTime,
-                  _id: response.data._id
-              };
-              this.props.socketFunction((socket) => {
-                  this.props.startTimerSocket(socket, timerData);
-              });
-        });
+            .then((response) => {
+                let timerData = {
+                    startTime: response.data.startTime,
+                    _id: response.data._id
+                };
+                this.props.socketFunction((socket) => {
+                    this.props.startTimerSocket(socket, timerData);
+                });
+            });
     }
 
     endInterview(_id) {
-      axios.get(API_SERVER_URL + '/application/end/' + _id)
-      .then((response) => {
-            let timerData = {
-                endTime: response.data.endTime,
-                _id: response.data._id
-            };
-            this.props.socketFunction((socket) => {
-                this.props.endTimerSocket(socket, timerData);
+        axios.get(API_SERVER_URL + '/application/end/' + _id)
+            .then((response) => {
+                let timerData = {
+                    endTime: response.data.endTime,
+                    _id: response.data._id
+                };
+                this.props.socketFunction((socket) => {
+                    this.props.endTimerSocket(socket, timerData);
+                });
             });
-      });
     }
 
     render() {

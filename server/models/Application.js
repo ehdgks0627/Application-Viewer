@@ -20,10 +20,7 @@ const ApplicationSchema = new mongoose.Schema({
     answer: { type: Array, required: false, default: [] },
     answerIndex: { type: Number, required: false, default: 1 },
     startTime: {type: Number, required: false, default: null },
-    endTime: {type: Number, required: false, default: null }
-},
-{
-    timestamps: true
+    endTime: {type: Number, required: false, default: null },
 });
 
 // Create Model & Export

@@ -25,9 +25,9 @@ class Alert extends Component {
 
     render() {
         return(
-          <div className="alert" onClick={this.onClick}>
-            <strong>현재 면접자</strong> {this.props.content}
-          </div>
+            <div className="alert" onClick={this.onClick}>
+                <strong>현재 면접자</strong> {this.props.content}
+            </div>
         );
     }
 }

@@ -47,26 +47,26 @@ class Application extends Component {
     componentDidMount() {
         axios.get(API_SERVER_URL + '/application/' + this.state._id)
             .then((result) => {
-              let data = result.data;
-              this.setState({
-                  name: data.name,
-                  sid: data.sid,
-                  pnumber: data.pnumber,
-                  email: data.email,
-                  hobby: data.hobby,
-                  strong: data.strong,
-                  study: data.study,
-                  profile: data.profile,
-                  last: data.last,
-                  photo: data.photo,
-                  question: data.question,
-                  major: data.major,
-                  special: data.special,
-                  answer: data.answer,
-                  startTime: data.startTime,
-                  endTime: data.endTime
-              });
-              this.forceUpdate(); // update to rerender ApplicationItem
+                let data = result.data;
+                this.setState({
+                    name: data.name,
+                    sid: data.sid,
+                    pnumber: data.pnumber,
+                    email: data.email,
+                    hobby: data.hobby,
+                    strong: data.strong,
+                    study: data.study,
+                    profile: data.profile,
+                    last: data.last,
+                    photo: data.photo,
+                    question: data.question,
+                    major: data.major,
+                    special: data.special,
+                    answer: data.answer,
+                    startTime: data.startTime,
+                    endTime: data.endTime
+                });
+                this.forceUpdate(); // update to rerender ApplicationItem
             })
             .catch((error) => { console.log(error);/*window.location = '/list'; */});
     }
@@ -75,18 +75,18 @@ class Application extends Component {
         if(nextProps._id === this.state._id) {
             let newState = {};
             if('photo' in nextProps &&
-               nextProps.photo &&
-               nextProps.photo !== this.state.photo) {
+                nextProps.photo &&
+                nextProps.photo !== this.state.photo) {
                 newState.photo = nextProps.photo;
             }
             if('startTime' in nextProps &&
-               nextProps.startTime &&
-               nextProps.startTime !== this.state.startTime) {
+                nextProps.startTime &&
+                nextProps.startTime !== this.state.startTime) {
                 newState.startTime = nextProps.startTime;
             }
             if('endTime' in nextProps &&
-               nextProps.endTime &&
-               nextProps.endTime !== this.state.endTime) {
+                nextProps.endTime &&
+                nextProps.endTime !== this.state.endTime) {
                 newState.endTime = nextProps.endTime;
             }
             if(Object.keys(newState).length !== 0) {

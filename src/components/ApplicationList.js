@@ -33,25 +33,25 @@ class ApplicationList extends Component {
             return element._id === nextProps._id;
         });
         if(applicationIndex !== -1 &&
-           this.state.applications[applicationIndex].photo !== nextProps.photo) {
-              this.setState({
-                  applications: update(this.state.applications, {
-                                       [applicationIndex]: {
-                                         photo: {
-                                           $set: nextProps.photo}}})
-              });
+            this.state.applications[applicationIndex].photo !== nextProps.photo) {
+            this.setState({
+                applications: update(this.state.applications, {
+                    [applicationIndex]: {
+                        photo: {
+                            $set: nextProps.photo}}})
+            });
         }
     }
 
     render() {
         let mainStyle = {
-          'width': '50%',
-          'min-width': '800px',
-          'margin': '0 auto'
+            'width': '50%',
+            'min-width': '800px',
+            'margin': '0 auto'
         };
 
         let rowStye = {
-          'margin': '1em'
+            'margin': '1em'
         };
 
         const mapToComponents = (data) => {
@@ -76,7 +76,7 @@ class ApplicationList extends Component {
                 }
             }
             if(buffer.length !== 0) {
-              dom.push((<div className="row" style={rowStye}>{buffer}</div>));
+                dom.push((<div className="row" style={rowStye}>{buffer}</div>));
             }
             return dom;
         };

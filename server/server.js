@@ -35,7 +35,7 @@ app.get('*', (req, res) => {
 let server = http.createServer(app);
 let io = socketServer(server);
 
-server.listen(port, ()=> {
+server.listen(port, "0.0.0.0", ()=> {
     console.log("Express & SocketIO listening on port");
 });
 

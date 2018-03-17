@@ -17,15 +17,15 @@ function titleToColumn(title) {
 }
 
 export default function (socket) {
-  	socket.on('newAlert', (alertData) => {
+    socket.on('newAlert', (alertData) => {
         io.emit('newAlert', alertData);
-  	});
+    });
     socket.on('startTimer', (timerData) => {
         io.emit('startTimer', timerData);
-  	});
+    });
     socket.on('endTimer', (timerData) => {
         io.emit('endTimer', timerData);
-  	});
+    });
     socket.on('newItem', (itemData) => {
         Application.findById(itemData._id, function(err, application) {
             if(err) {
@@ -36,7 +36,7 @@ export default function (socket) {
                     let column = titleToColumn(itemData.title);
                     let columnIndex = column + "Index";
                     let savedItemData = {key: application[columnIndex],
-                                         content: itemData.content};
+                        content: itemData.content};
                     application[columnIndex] += 1;
                     application[column].push(savedItemData);
 
@@ -55,7 +55,7 @@ export default function (socket) {
                 }
             }
         });
-  	});
+    });
     socket.on('removeItem', (itemData) => {
         Application.findById(itemData._id, function(err, application) {
             if(err) {
@@ -84,7 +84,7 @@ export default function (socket) {
                 }
             }
         });
-  	});
+    });
     socket.on('editItem', (itemData) => {
         let column = titleToColumn(itemData.title);
         let columnIndex = column + "Index";
@@ -103,7 +103,7 @@ export default function (socket) {
                         query.$set[column] = application[column];
                         Application.findByIdAndUpdate(itemData._id, query, function(err, doc){
                             if(err) {
-                              console.log(err);
+                                console.log(err);
                             }
                             io.emit('editItem', itemData);
                         });
@@ -115,5 +115,5 @@ export default function (socket) {
                 }
             }
         });
-  	});
+    });
 }

@@ -21,23 +21,28 @@ class Main extends Component {
 
     render() {
         return(
-          <main>
-            <Switch>
-              <Route exact path='/application/:_id'
-              render={(props) => (
-                <Application
-                startInterview={this.props.startInterview}
-                endInterview={this.props.endInterview}
-                ref={(applicationElement) => {this.applicationElement = applicationElement;}}
-                {...props}
-                />)}
-              />
-              <Route exact path='/list'
-              component={ApplicationList}
-              />
-              <Route component={NotFound} />
-            </Switch>
-          </main>
+            <main>
+                <Switch>
+                    <Route
+					exact
+					path='/application/:_id'
+                    render={(props) => (
+                        <Application
+                        startInterview={this.props.startInterview}
+                        endInterview={this.props.endInterview}
+                        ref={(applicationElement) => {this.applicationElement = applicationElement;}}
+                        {...props}
+                        />
+                    )}
+                    />
+                    <Route
+					exact
+					path='/list'
+                    component={ApplicationList}
+                    />
+                    <Route component={NotFound} />
+                </Switch>
+            </main>
         );
     }
 }

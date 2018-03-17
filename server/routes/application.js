@@ -9,32 +9,32 @@ let router = express.Router();
 
 router.get('/sync', function(req, res) {
     axios.post('http://layer7.kr/2018/apply/api.php',
-               'password=' + PASSWORD)
-   .then((response) => {
-     let data = response.data;
-     data.forEach((currentValue) => {
-       let column = {
-           sid: currentValue.sid,
-           name: currentValue.name,
-           pnumber: currentValue.pnumber,
-           email: currentValue.email,
-           hobby: currentValue.hobby,
-           strong: currentValue.strong,
-           study: currentValue.study,
-           profile: currentValue.profile,
-           last: currentValue.last
-       };
+        'password=' + PASSWORD)
+        .then((response) => {
+            let data = response.data;
+            data.forEach((currentValue) => {
+                let column = {
+                    sid: currentValue.sid,
+                    name: currentValue.name,
+                    pnumber: currentValue.pnumber,
+                    email: currentValue.email,
+                    hobby: currentValue.hobby,
+                    strong: currentValue.strong,
+                    study: currentValue.study,
+                    profile: currentValue.profile,
+                    last: currentValue.last
+                };
 
-       let application = new Application(column);
+                let application = new Application(column);
 
-       application.save(function(err, data) {
-           if(err) {
-               console.log("Some error occurred while creating the Application. (sid : " + currentValue.sid + ")");
-           }
-       });
-     });
-     res.send({message: "Success"});
-   });
+                application.save(function(err, data) {
+                    if(err) {
+                        console.log("Some error occurred while creating the Application. (sid : " + currentValue.sid + ")");
+                    }
+                });
+            });
+            res.send({message: "Success"});
+        });
 });
 
 router.get('/', function(req, res) {
@@ -54,14 +54,14 @@ router.get('/:_id', function(req, res) {
             console.log(err);
             res.status(500).send({message: "Some error occurred while retrieving applications."});
         } else {
-          if(application)
-          {
-              res.send(application);
-          }
-          else
-          {
-            return res.status(404).send({message: "Application not found with id " + req.params._id});
-          }
+            if(application)
+            {
+                res.send(application);
+            }
+            else
+            {
+                return res.status(404).send({message: "Application not found with id " + req.params._id});
+            }
         }
     });
 });
