@@ -70,7 +70,7 @@ class ApplicationItem extends Component {
             let items = data.map((item) => {
                 return (<ApplicationItemDetail index={item.key} _id={this.props._id} title={this.props.title} content={item.content} />);
             });
-            return <ul className="list-group">{items}</ul>;
+            return <ul className="list-group mb-3">{items}</ul>;
         };
         return(
             <li className="list-group-item">

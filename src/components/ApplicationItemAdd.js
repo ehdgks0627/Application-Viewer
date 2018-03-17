@@ -40,7 +40,7 @@ class ApplicationItemEdit extends Component {
                 this.props.newItemSocket(socket, itemData);
             });
             this.setState({content: ''});
-            this.input.focus();
+            this.textarea.focus();
         }
     }
 
@@ -59,16 +59,17 @@ class ApplicationItemEdit extends Component {
     render() {
         return(
             <div>
-              <input
-              text="text"
+              <textarea
               name="content"
+              className="form-control"
               value={this.state.content}
               onChange={this.onChange}
               onKeyPress={this.onKeyPress}
-              ref={(input) => {this.input = input;}}
-              style={{'float': 'left'}}
-              />
-              <button className="btn-primary" onClick={this.addItem} style={{'float': 'right'}}>추가</button>
+              style={{'width': '100%'}}
+              row="5"
+              ref={(textarea) => {this.textarea = textarea;}}
+              >{this.state.content}</textarea>
+              <button className="btn-primary mt-1" onClick={this.addItem} style={{'float': 'right'}}>추가</button>
             </div>
         );
     }

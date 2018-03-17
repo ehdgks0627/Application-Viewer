@@ -77,6 +77,7 @@ class ApplicationItemDetail extends Component {
         let textareaItem = (<div>
           <textarea
           style={{'width': '100%'}}
+          className="form-control"
           rows="5"
           ref={(editTextarea) => {this.editTextarea = editTextarea;}}>{this.state.content}
           </textarea>
