@@ -8,7 +8,7 @@ import { db } from '../connection';
 let router = express.Router();
 
 router.get('/sync', function(req, res) {
-    axios.post('http://layer7.kr/2018/apply/api.php',
+    axios.post('https://layer7.kr/2018/apply/api.php',
         'password=' + PASSWORD)
         .then((response) => {
             let data = response.data;
