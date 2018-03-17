@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "babel-cli": "^6.26.0",
     "babel-preset-stage-2": "^6.24.1",
     "body-parser": "^1.18.2",
     "css-loader": "^0.28.10",
@@ -27,14 +28,12 @@
     "socket.io": "^2.0.4",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12",
     "webpack-combine-loaders": "^2.0.3",
     "webpack-dev-server": "^3.1.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "babel server --out-dir build --presets=es2015",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "server": "babel server --out-dir build && node build/server.js"
+    "server": "./node_modules/.bin/babel server --out-dir build && node build/server.js",
+    "client": "./node_modules/.bin/webpack"
   }
 }

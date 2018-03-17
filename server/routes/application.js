@@ -1,4 +1,4 @@
-import PASSWORD from './password.js';
+import PASSWORD from '../password.js';
 import express from 'express';
 import path from 'path';
 import axios from 'axios';

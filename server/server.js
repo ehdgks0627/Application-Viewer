@@ -1,6 +1,8 @@
 import express from 'express';
 import http from 'http';
+import https from 'https';
 import path from 'path';
+import fs from 'fs';
 import morgan from 'morgan';
 import bodyParser from 'body-parser';
 import socketServer from 'socket.io';
@@ -31,7 +33,7 @@ app.get('*', (req, res) => {
 });
 
 let server = http.createServer(app);
-export let io = socketServer(server);
+let io = socketServer(server);
 
 server.listen(port, ()=> {
     console.log("Express & SocketIO listening on port");
