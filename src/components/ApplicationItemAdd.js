@@ -51,7 +51,8 @@ class ApplicationItemEdit extends Component {
     }
 
     onKeyPress(e) {
-        if(e.charCode == 13) { // pressed enter
+        if(e.charCode == 13 && !e.shiftKey && !e.ctrlKey) { // pressed enter
+            e.preventDefault();
             this.addItem();
         }
     }
