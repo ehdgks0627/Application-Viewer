@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const ApplicationSchema = new mongoose.Schema({
     sid: { type: Number, required: true, unique: true },
@@ -11,10 +11,14 @@ const ApplicationSchema = new mongoose.Schema({
     study: { type: String, required: false, default: '' },
     profile: { type: String, required: false, default: '' },
     last: { type: String, required: false, default: '' },
-    questionList: { type: Array, required: false, default: [] },
+    question: { type: Array, required: false, default: [] },
+    questionIndex: { type: Number, required: false, default: 1 },
     major: { type: Array, required: false, default: [] },
+    majorIndex: { type: Number, required: false, default: 1 },
     special: { type: Array, required: false, default: [] },
-    answer: { type: String, required: false, default: '' },
+    specialIndex: { type: Number, required: false, default: 1 },
+    answer: { type: Array, required: false, default: [] },
+    answerIndex: { type: Number, required: false, default: 1 },
     startTime: {type: Number, required: false, default: null },
     endTime: {type: Number, required: false, default: null }
 },
@@ -23,4 +27,4 @@ const ApplicationSchema = new mongoose.Schema({
 });
 
 // Create Model & Export
-module.exports = mongoose.model('Application', ApplicationSchema);
+export default mongoose.model('Application', ApplicationSchema);

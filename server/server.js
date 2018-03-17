@@ -41,16 +41,6 @@ server.listen(port, ()=> {
 /* Socket logic starts here																   */
 /***************************************************************************************** */
 
-io.on('connection', function (socket) {
-  	socket.on('newAlert', (alertData) => {
-        io.emit('newAlert', alertData);
-  	});
-    socket.on('startTimer', (timerData) => {
-        io.emit('startTimer', timerData);
-  	});
-    socket.on('endTimer', (timerData) => {
-        io.emit('endTimer', timerData);
-  	});
-});
+io.on('connection', socket);
 
 module.exports = {io: io};

@@ -30,10 +30,55 @@ class App extends Component {
         this.socket.on('endTimer', (timerData) => {
             this.props.endTimer(timerData);
         });
+        this.socket.on('newItem', (itemData) => {
+            this.props.newItem(itemData);
+        });
+        this.socket.on('removeItem', (itemData) => {
+            this.props.removeItem(itemData);
+        });
+        this.socket.on('editItem', (itemData) => {
+            this.props.editItem(itemData);
+        });
+
+        Array.prototype.equals = function (array) {
+            // if the other array is a falsy value, return
+            if (!array)
+                return false;
+
+            // compare lengths - can save a lot of time
+            if (this.length != array.length)
+                return false;
+
+            for (var i = 0, l=this.length; i < l; i++) {
+                // Check if we have nested arrays
+                if (this[i] instanceof Array && array[i] instanceof Array) {
+                    // recurse into the nested arrays
+                    if (!this[i].equals(array[i]))
+                        return false;
+                }
+                else if (this[i] != array[i]) {
+                    // Warning - two different object instances will never be equal: {x:20} != {x:20}
+                    return false;
+                }
+            }
+            return true;
+        };
+        // Hide method from for-in loops
+        Object.defineProperty(Array.prototype, "equals", {enumerable: false});
 
         this.startInterview = this.startInterview.bind(this);
         this.endInterview = this.endInterview.bind(this);
     }
+
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.callback) {
+            nextProps.callback(this.socket);
+            return {};
+        } else {
+            return nextProps;
+        }
+      }
+
 
     componentWillUnmount() {
         this.socket.disconnect();
@@ -44,14 +89,18 @@ class App extends Component {
             content: content,
             _id: _id
         };
-        this.props.newAlertSocket(this.socket, alertData);
+        this.props.socketFunction((socket) => {
+            this.props.newAlertSocket(socket, alertData);
+        });
         axios.get(API_SERVER_URL + '/application/start/' + _id)
         .then((response) => {
               let timerData = {
                   startTime: response.data.startTime,
                   _id: response.data._id
               };
-              this.props.startTimerSocket(this.socket, timerData); //emit이 안댐
+              this.props.socketFunction((socket) => {
+                  this.props.startTimerSocket(socket, timerData);
+              });
         });
     }
 
@@ -62,7 +111,9 @@ class App extends Component {
                 endTime: response.data.endTime,
                 _id: response.data._id
             };
-            this.props.endTimerSocket(this.socket, timerData); //emit이 안댐
+            this.props.socketFunction((socket) => {
+                this.props.endTimerSocket(socket, timerData);
+            });
       });
     }
 
@@ -82,7 +133,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state = {}) => {
-    return { content: state.alert.content, _id: state.alert._id };
+    return { content: state.alert.content, _id: state.alert._id, callback: state.socket.callback };
 };
 
 const mapDispatchToProps = (dispatch) => {

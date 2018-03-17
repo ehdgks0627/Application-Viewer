@@ -22,7 +22,7 @@ class ApplicationList extends Component {
         axios.get(API_SERVER_URL + '/application')
             .then((result) => {
                 this.setState({
-                  applications: update(this.state.applications, {$push: result.data})
+                    applications: update(this.state.applications, {$push: result.data})
                 });
             });
 
@@ -39,7 +39,7 @@ class ApplicationList extends Component {
                                        [applicationIndex]: {
                                          photo: {
                                            $set: nextProps.photo}}})
-                });
+              });
         }
     }
 

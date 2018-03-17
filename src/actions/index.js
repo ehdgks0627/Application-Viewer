@@ -1,5 +1,13 @@
 import * as TYPES from './ActionTypes';
 
+export function photoUploaded(photoData) {
+    return {
+        type: TYPES.PHOTO_UPLOADED,
+        photo: photoData.photo,
+        _id: photoData._id
+    };
+}
+
 export function newAlert(alertData) {
     return {
         type: TYPES.NEW_ALERT,
@@ -11,14 +19,6 @@ export function newAlert(alertData) {
 export function newAlertSocket(socket, alertData) {
     return (dispatch) => {
         socket.emit('newAlert', alertData);
-    };
-}
-
-export function photoUploaded(photoData) {
-    return {
-        type: TYPES.PHOTO_UPLOADED,
-        photo: photoData.photo,
-        _id: photoData._id
     };
 }
 
@@ -47,5 +47,59 @@ export function endTimer(timerData) {
 export function endTimerSocket(socket, timerData) {
     return (dispatch) => {
         socket.emit('endTimer', timerData);
+    };
+}
+
+export function newItem(itemData) {
+    return {
+        type: TYPES.NEW_ITEM,
+        _id: itemData._id,
+        key: itemData.key,
+        title: itemData.title,
+        content: itemData.content
+    };
+}
+
+export function newItemSocket(socket, itemData) {
+    return (dispatch) => {
+        socket.emit('newItem', itemData);
+    };
+}
+
+export function removeItem(itemData) {
+    return {
+        type: TYPES.REMOVE_ITEM,
+        _id: itemData._id,
+        key: itemData.key,
+        title: itemData.title
+    };
+}
+
+export function removeItemSocket(socket, itemData) {
+    return (dispatch) => {
+        socket.emit('removeItem', itemData);
+    };
+}
+
+export function editItem(itemData) {
+    return {
+        type: TYPES.EDIT_ITEM,
+        _id: itemData._id,
+        key: itemData.key,
+        title: itemData.title,
+        content: itemData.content
+    };
+}
+
+export function editItemSocket(socket, itemData) {
+    return (dispatch) => {
+        socket.emit('editItem', itemData);
+    };
+}
+
+export function socketFunction(callback) {
+    return {
+        type: TYPES.SOCKET_FUNCTION,
+        callback: callback
     };
 }

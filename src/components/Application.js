@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 import ApplicationItem from './ApplicationItem';
+import ApplicationItemReadOnly from './ApplicationItemReadOnly';
 import StopWatch from './StopWatch';
 import blankImage from '../static/blank.png';
 import { SERVER_URL, API_SERVER_URL } from '../config';
@@ -33,10 +34,10 @@ class Application extends Component {
             profile: null,
             last: null,
             photo: null,
-            questionList: [],
+            question: [],
             major: [],
             special: [],
-            answer: null,
+            answer: [],
             startTime: null,
             endTime: null,
             _id: this.props.match.params._id
@@ -58,18 +59,19 @@ class Application extends Component {
                   profile: data.profile,
                   last: data.last,
                   photo: data.photo,
-                  questionList: data.questionList,
+                  question: data.question,
                   major: data.major,
                   special: data.special,
                   answer: data.answer,
                   startTime: data.startTime,
                   endTime: data.endTime
               });
+              this.forceUpdate(); // update to rerender ApplicationItem
             })
-            .catch((error) => { window.location = '/list'; });
+            .catch((error) => { console.log(error);/*window.location = '/list'; */});
     }
 
-    componentWillReceiveProps(nextProps, nextState) {
+    componentWillReceiveProps(nextProps) {
         if(nextProps._id === this.state._id) {
             let newState = {};
             if('photo' in nextProps &&
@@ -94,11 +96,11 @@ class Application extends Component {
     }
 
     render() {
-      let startInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.startInterview(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button>);
-      let endInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.endInterview(this.state._id)}}>면접 끝내기</button>);
-      let doneInterviewButton = (<button className="btn-primary mt-3">면접 종료됨</button>)
+        let startInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.startInterview(this.state.name, this.state._id)}}>면접 시작(알림 보내기)</button>);
+        let endInterviewButton = (<button className="btn-primary mt-3" onClick={() => {this.props.endInterview(this.state._id)}}>면접 끝내기</button>);
+        let doneInterviewButton = (<button className="btn-primary mt-3">면접 종료됨</button>)
 
-      let detailview = (
+        return(
           <div className="py-3">
             <div className="container">
               <div className="row">
@@ -111,7 +113,7 @@ class Application extends Component {
                         type="file"
                         style={{"display": "none"}}
                         accept="image/*"
-                        ref={(imageInput => {this.imageInput = imageInput;})}
+                        ref={(imageInput) => {this.imageInput = imageInput;}}
                         onChange={(event)=> {
                             if(event.target.value) {
                                 let data = new FormData();
@@ -147,26 +149,22 @@ class Application extends Component {
                   <StopWatch caption="경과 시간 : " startTime={this.state.startTime} endTime={this.state.endTime} />
                   <hr />
                   <ul className="list-group">
-                    <ApplicationItem title="취미" content={this.state.hobby} isEditable={false} />
-                    <ApplicationItem title="특기" content={this.state.strong} isEditable={false} />
-                    <ApplicationItem title="공부한 것" content={this.state.study} isEditable={false} />
-                    <ApplicationItem title="자기소개" content={this.state.profile} isEditable={false} />
-                    <ApplicationItem title="마지막으로 하고 싶은 말" content={this.state.last} isEditable={false} />
+                    <ApplicationItemReadOnly title="취미" content={this.state.hobby} />
+                    <ApplicationItemReadOnly title="특기" content={this.state.strong} />
+                    <ApplicationItemReadOnly title="공부한 것" content={this.state.study} />
+                    <ApplicationItemReadOnly title="자기소개" content={this.state.profile} />
+                    <ApplicationItemReadOnly title="마지막으로 하고 싶은 말" content={this.state.last} />
                     <br />
-                    <ApplicationItem title="질문 리스트" content={this.state.questionList} isEditable={true} />
-                    <ApplicationItem title="전공 실력" content={this.state.major} isEditable={true} />
-                    <ApplicationItem title="특이사항" content={this.state.special} isEditable={true} />
-                    <ApplicationItem title="답변" content={this.state.answer} isEditable={true} />
+
+                    <ApplicationItem title="질문 리스트" contents={this.state.question} _id={this.state._id} />
+                    <ApplicationItem title="전공 실력" contents={this.state.major} _id={this.state._id} />
+                    <ApplicationItem title="특이사항" contents={this.state.special} _id={this.state._id} />
+                    <ApplicationItem title="답변" contents={this.state.answer} _id={this.state._id} />
                   </ul>
                   </div>
                 <div className="col-md-2" />
               </div>
             </div>
-          </div>
-      );
-        return(
-          <div>
-            {detailview}
           </div>
         );
     }

@@ -10,4 +10,4 @@ db.once('open', function(){
     console.log("Connected to mongod server");
 });
 
-module.exports = db;
+export default db;

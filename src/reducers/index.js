@@ -2,10 +2,11 @@ import { combineReducers } from 'redux';
 
 import alert from './alert';
 import application from './application';
-import item from './item';
+import applicationItem from './applicationItem';
+import socket from './socket';
 
 const reducers = combineReducers({
-    alert, application, item
+    alert, application, applicationItem, socket
 });
 
 export default reducers;
