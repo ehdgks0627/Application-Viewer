@@ -98,15 +98,15 @@ export default function (socket) {
                     if(index === -1) {
                         console.log("Element not found with key " + itemData.key);
                     } else {
-                        // TODO editItem error
                         application[column][index].content = itemData.content;
                         let query = {$set: {}};
                         query.$set[column] = application[column];
                         Application.findByIdAndUpdate(itemData._id, query, function(err, doc){
                             if(err) {
                                 console.log(err);
+                            } else {
+                                io.emit('editItem', itemData);
                             }
-                            io.emit('editItem', itemData);
                         });
                     }
                 }
