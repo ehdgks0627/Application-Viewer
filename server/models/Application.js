@@ -17,8 +17,7 @@ const ApplicationSchema = new mongoose.Schema({
     majorIndex: { type: Number, required: false, default: 1 },
     special: { type: Array, required: false, default: [] },
     specialIndex: { type: Number, required: false, default: 1 },
-    answer: { type: Array, required: false, default: [] },
-    answerIndex: { type: Number, required: false, default: 1 },
+    answer: { type: String, required: false, default: '' },
     startTime: {type: Number, required: false, default: null },
     endTime: {type: Number, required: false, default: null },
 });

@@ -16,6 +16,8 @@ export const REMOVE_ITEM = 'REMOVE_ITEM';
 export const REMOVE_ITEM_SOCKET = 'REMOVE_ITEM_SOCKET';
 export const EDIT_ITEM = 'EDIT_ITEM';
 export const EDIT_ITEM_SOCKET = 'EDIT_ITEM_SOCKET';
+export const KEY_EVENT = 'KEY_EVENT';
+export const KEY_EVENT_SOCKET = 'KEY_EVENT_SOCKET';
 
 // Socket
 export const SOCKET_FUNCTION = 'SOCKET_FUNCTION';

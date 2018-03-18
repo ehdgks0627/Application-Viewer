@@ -97,6 +97,22 @@ export function editItemSocket(socket, itemData) {
     };
 }
 
+
+export function keyEvent(keyData) {
+    return {
+        type: TYPES.KEY_EVENT,
+        _id: keyData._id,
+        title: keyData.title,
+        content: keyData.content,
+    };
+}
+
+export function keyEventSocket(socket, keyData) {
+    return (dispatch) => {
+        socket.emit('keyEvent', keyData);
+    };
+}
+
 export function socketFunction(callback) {
     return {
         type: TYPES.SOCKET_FUNCTION,

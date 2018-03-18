@@ -39,6 +39,9 @@ class App extends Component {
         this.socket.on('editItem', (itemData) => {
             this.props.editItem(itemData);
         });
+        this.socket.on('keyEvent', (keyData) => {
+            this.props.keyEvent(keyData);
+        });
 
         Array.prototype.equals = function (array) {
             // if the other array is a falsy value, return

@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import ApplicationItem from './ApplicationItem';
 import ApplicationItemReadOnly from './ApplicationItemReadOnly';
+import ApplicationItemRealTimeKey from './ApplicationItemRealTimeKey';
 import StopWatch from './StopWatch';
 import blankImage from '../static/blank.png';
 import { SERVER_URL, API_SERVER_URL } from '../config';
@@ -159,7 +160,7 @@ class Application extends Component {
                     <ApplicationItem title="질문 리스트" contents={this.state.question} _id={this.state._id} />
                     <ApplicationItem title="전공 실력" contents={this.state.major} _id={this.state._id} />
                     <ApplicationItem title="특이사항" contents={this.state.special} _id={this.state._id} />
-                    <ApplicationItem title="답변" contents={this.state.answer} _id={this.state._id} />
+                    <ApplicationItemRealTimeKey title="답변" content={this.state.answer} _id={this.state._id} />
                   </ul>
                   </div>
                 <div className="col-md-2" />

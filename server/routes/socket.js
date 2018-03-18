@@ -26,6 +26,32 @@ export default function (socket) {
     socket.on('endTimer', (timerData) => {
         io.emit('endTimer', timerData);
     });
+    socket.on('keyEvent', (keyData) => {
+        Application.findById(keyData._id, function(err, application) {
+            if(err) {
+                console.log(err);
+            } else {
+                if(application)
+                {
+                    let column = titleToColumn(keyData.title);
+                    application[column] = keyData.content;
+
+                    application.save(function(err, data){
+                        if(err) {
+                            console.log(err);
+                        } else {
+                            io.emit('newItem', keyData);
+                        }
+                    });
+                }
+                else
+                {
+                    console.log("Application not found with id " + keyData._id);
+                }
+            }
+        });
+        io.emit('keyEvent', keyData);
+    });
     socket.on('newItem', (itemData) => {
         Application.findById(itemData._id, function(err, application) {
             if(err) {
