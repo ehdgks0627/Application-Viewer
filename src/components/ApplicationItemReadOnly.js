@@ -21,7 +21,7 @@ class ApplicationItemReadOnly extends Component {
     render() {
         return(
             <li className="list-group-item">
-              <h4>{this.props.title}</h4>
+              <h4>{this.props.title}({this.props.content ? this.props.content.length : 0})</h4>
                 <br />
                 {this.props.content}
             </li>
