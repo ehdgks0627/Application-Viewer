@@ -82,7 +82,7 @@ class ApplicationList extends Component {
         };
 
         return(
-            <div style={mainStyle}>{mapToComponents(this.state.applications)}</div>
+            <div style={mainStyle}><h1 style={{'text-align': 'center'}}>현재 지원자 수 : {this.state.applications.length}</h1>{mapToComponents(this.state.applications)}</div>
         );
     }
 }
