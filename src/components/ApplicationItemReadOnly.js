@@ -23,7 +23,14 @@ class ApplicationItemReadOnly extends Component {
             <li className="list-group-item">
               <h4>{this.props.title}({this.props.content ? this.props.content.length : 0})</h4>
                 <br />
-                {this.props.content}
+                {this.props.content ? this.props.content.split('\n').map(function(item) {
+                    return (
+                        <div>
+                          {item}
+                          <br/>
+                        </div>
+                    )
+                }) : ''}
             </li>
         );
     }
