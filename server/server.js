@@ -45,4 +45,4 @@ server.listen(port, "0.0.0.0", ()=> {
 
 io.on('connection', socket);
 
-module.exports = {io: io};
+export default io;

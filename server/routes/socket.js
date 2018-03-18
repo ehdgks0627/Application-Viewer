@@ -1,4 +1,4 @@
-import { io } from '../server';
+import io from '../server';
 import Application from '../models/Application';
 import { ObjectId } from 'mongoose';
 
@@ -98,6 +98,7 @@ export default function (socket) {
                     if(index === -1) {
                         console.log("Element not found with key " + itemData.key);
                     } else {
+                        // TODO editItem error
                         application[column][index].content = itemData.content;
                         let query = {$set: {}};
                         query.$set[column] = application[column];
