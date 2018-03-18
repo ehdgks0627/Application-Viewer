@@ -69,7 +69,7 @@ class ApplicationItemEdit extends Component {
               style={{'width': '100%'}}
               row="5"
               ref={(textarea) => {this.textarea = textarea;}}
-              >{this.state.content}</textarea>
+              />
               <button className="btn-primary mt-1" onClick={this.addItem} style={{'float': 'right'}}>추가</button>
             </div>
         );

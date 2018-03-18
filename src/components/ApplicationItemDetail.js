@@ -32,6 +32,7 @@ class ApplicationItemDetail extends Component {
         this.onRemove = this.onRemove.bind(this);
         this.onEdit = this.onEdit.bind(this);
         this.onCancelEdit = this.onCancelEdit.bind(this);
+        this.onChange = this.onChange.bind(this);
     }
 
     onBeginEdit() {
@@ -66,6 +67,12 @@ class ApplicationItemDetail extends Component {
         this.setState({isEditing: false});
     }
 
+    onChange(e) {
+        let nextState = {};
+        nextState[e.target.name] = e.target.value;
+        this.setState(nextState);
+    }
+
     componentWillReceiveProps(nextProps) {
         if(nextProps.content !== this.state.content) {
             this.setState({content: nextProps.content});
@@ -80,8 +87,11 @@ class ApplicationItemDetail extends Component {
                 style={{'width': '100%'}}
                 className="form-control"
                 rows="5"
-                ref={(editTextarea) => {this.editTextarea = editTextarea;}}>{this.state.content}
-                </textarea>
+                name="content"
+                onChange={this.onChange}
+                value={this.state.content}
+                ref={(editTextarea) => {this.editTextarea = editTextarea;}}
+                />
             </div>);
         return (
             <li className="list-group-item">
