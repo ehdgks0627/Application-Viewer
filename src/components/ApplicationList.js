@@ -55,7 +55,15 @@ class ApplicationList extends Component {
         };
 
         const mapToComponents = (data) => {
-            data.sort();
+            data.sort((a, b) => {
+                if(a.sid > b.sid) {
+                    return 1;
+                } else if(a.sid < b.sid) {
+                    return -1;
+                } else {
+                    return 0;
+                }
+            });
             let components = data.map((item) => {
                 return (<ApplicationPreview
                          photo={item.photo ? item.photo : blankImage}
