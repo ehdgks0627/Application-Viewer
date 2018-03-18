@@ -1,4 +1,4 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);/*!
+@import url(https://fonts.googleapis.com/css?family=Roboto);/*!
 * Based on Bootstrap v4.0.0 (https://getbootstrap.com) 
 */
 /*!
@@ -6325,5 +6325,5 @@ html,body {
     text-align: center;
 }
 body {
-    font-family: 'Noto Sans KR';
+    font-family: 'Roboto';
 }
