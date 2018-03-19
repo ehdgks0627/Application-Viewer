@@ -67,7 +67,7 @@ class ApplicationItemEdit extends Component {
               onChange={this.onChange}
               onKeyPress={this.onKeyPress}
               style={{'width': '100%'}}
-              row="5"
+              rows="5"
               ref={(textarea) => {this.textarea = textarea;}}
               />
               <button className="btn-primary mt-1" onClick={this.addItem} style={{'float': 'right'}}>추가</button>

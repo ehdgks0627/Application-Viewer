@@ -65,7 +65,7 @@ class ApplicationItemRealTimeKey extends Component {
                className="form-control"
                onChange={this.onChange}
                style={{'width': '100%'}}
-               row="5"
+               rows="50"
                ref={(textarea) => {this.textarea = textarea;}}
                >{this.state.content}</textarea>
             </li>
